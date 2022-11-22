@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.vue.dao.BugMapper">
+
+    <sql id="Base_Column_List">
+        id, bug_tag, ascr_project, principal, bug_level, DATE_FORMAT(end_time,'%Y-%m-%d %H:%i:%s') end_time, bug_state, bug_confirm,
+    bug_desc, bug_desc_url, bug_solve_plan, bug_solve_plan_url, create_user, DATE_FORMAT(created,'%Y-%m-%d %H:%i:%s') created,
+    updated
+    </sql>
+
+    <resultMap id="BaseResultMap" type="com.demo.common.entity.BugInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="bug_tag" jdbcType="VARCHAR" property="bugTag"/>
+        <result column="ascr_project" jdbcType="VARCHAR" property="ascrProject"/>
+        <result column="principal" jdbcType="VARCHAR" property="principal"/>
+        <result column="bug_level" jdbcType="VARCHAR" property="bugLevel"/>
+        <result column="end_time" jdbcType="DATE" property="endTime"/>
+        <result column="bug_state" jdbcType="VARCHAR" property="bugState"/>
+        <result column="bug_confirm" jdbcType="VARCHAR" property="bugConfirm"/>
+        <result column="bug_desc" jdbcType="VARCHAR" property="bugDesc"/>
+        <result column="bug_desc_url" jdbcType="VARCHAR" property="bugDescUrl"/>
+        <result column="bug_solve_plan" jdbcType="VARCHAR" property="bugSolvePlan"/>
+        <result column="bug_solve_plan_url" jdbcType="VARCHAR" property="bugSolvePlanUrl"/>
+        <result column="create_user" jdbcType="VARCHAR" property="createUser"/>
+        <result column="created" jdbcType="DATE" property="created"/>
+        <result column="updated" jdbcType="DATE" property="updated"/>
+    </resultMap>
+
+    <select id="queryList" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM `bug_info`
+
+    </select>
+</mapper>

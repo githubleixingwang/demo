@@ -1,0 +1,1082 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.common.mapper.SgDeviceFilesMapper">
+  <resultMap id="BaseResultMap" type="com.demo.common.entity.SgDeviceFiles">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="device_number" jdbcType="VARCHAR" property="deviceNumber" />
+    <result column="device_type" jdbcType="VARCHAR" property="deviceType" />
+    <result column="device_model" jdbcType="VARCHAR" property="deviceModel" />
+    <result column="device_firm" jdbcType="VARCHAR" property="deviceFirm" />
+    <result column="business_system" jdbcType="VARCHAR" property="businessSystem" />
+    <result column="communication_type" jdbcType="VARCHAR" property="communicationType" />
+    <result column="communication_agreement" jdbcType="VARCHAR" property="communicationAgreement" />
+    <result column="communication_protocal" jdbcType="VARCHAR" property="communicationProtocal" />
+    <result column="term_commte_address" jdbcType="VARCHAR" property="termCommteAddress" />
+    <result column="master_address_ip" jdbcType="VARCHAR" property="masterAddressIp" />
+    <result column="master_port" jdbcType="VARCHAR" property="masterPort" />
+    <result column="is_new_norm" jdbcType="VARCHAR" property="isNewNorm" />
+    <result column="import_time" jdbcType="TIMESTAMP" property="importTime" />
+    <result column="device_address" jdbcType="VARCHAR" property="deviceAddress" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="gd_longitude" jdbcType="VARCHAR" property="gdLongitude" />
+    <result column="gd_latitude" jdbcType="VARCHAR" property="gdLatitude" />
+    <result column="principal" jdbcType="VARCHAR" property="principal" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="is_register" jdbcType="VARCHAR" property="isRegister" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
+    <result column="register_user" jdbcType="VARCHAR" property="registerUser" />
+    <result column="is_cancel" jdbcType="VARCHAR" property="isCancel" />
+    <result column="cancel_time" jdbcType="TIMESTAMP" property="cancelTime" />
+    <result column="cancel_user" jdbcType="VARCHAR" property="cancelUser" />
+    <result column="is_identificat" jdbcType="VARCHAR" property="isIdentificat" />
+    <result column="identificat_time" jdbcType="TIMESTAMP" property="identificatTime" />
+    <result column="identifica_user" jdbcType="VARCHAR" property="identificaUser" />
+    <result column="right_unite" jdbcType="VARCHAR" property="rightUnite" />
+    <result column="detail_address" jdbcType="VARCHAR" property="detailAddress" />
+    <result column="business_system_devicenum" jdbcType="VARCHAR" property="businessSystemDevicenum" />
+    <result column="opsystem_name" jdbcType="VARCHAR" property="opsystemName" />
+    <result column="opsystem_type" jdbcType="VARCHAR" property="opsystemType" />
+    <result column="opsystem_version" jdbcType="VARCHAR" property="opsystemVersion" />
+    <result column="opsystem_id" jdbcType="VARCHAR" property="opsystemId" />
+    <result column="system_develop_unite" jdbcType="VARCHAR" property="systemDevelopUnite" />
+    <result column="option_user" jdbcType="VARCHAR" property="optionUser" />
+    <result column="option_time" jdbcType="TIMESTAMP" property="optionTime" />
+    <result column="device_name" jdbcType="VARCHAR" property="deviceName" />
+    <result column="device_status" jdbcType="VARCHAR" property="deviceStatus" />
+    <result column="cpus" jdbcType="INTEGER" property="cpus" />
+    <result column="frequency" jdbcType="INTEGER" property="frequency" />
+    <result column="cache" jdbcType="INTEGER" property="cache" />
+    <result column="arch" jdbcType="VARCHAR" property="arch" />
+    <result column="cpu_lmt" jdbcType="INTEGER" property="cpuLmt" />
+    <result column="phy" jdbcType="INTEGER" property="phy" />
+    <result column="virt" jdbcType="INTEGER" property="virt" />
+    <result column="mem_lmt" jdbcType="INTEGER" property="memLmt" />
+    <result column="volume" jdbcType="INTEGER" property="volume" />
+    <result column="volume_lmt" jdbcType="INTEGER" property="volumeLmt" />
+    <result column="distro" jdbcType="VARCHAR" property="distro" />
+    <result column="version" jdbcType="VARCHAR" property="version" />
+    <result column="kernel" jdbcType="VARCHAR" property="kernel" />
+    <result column="soft_version" jdbcType="VARCHAR" property="softVersion" />
+    <result column="temp" jdbcType="INTEGER" property="temp" />
+    <result column="tem_low" jdbcType="INTEGER" property="temLow" />
+    <result column="tem_high" jdbcType="INTEGER" property="temHigh" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, device_number, device_type, device_model, device_firm, business_system, communication_type, 
+    communication_agreement, communication_protocal, term_commte_address, master_address_ip, 
+    master_port, is_new_norm, import_time, device_address, province, city, region, gd_longitude, 
+    gd_latitude, principal, telephone, is_register, register_time, register_user, is_cancel, 
+    cancel_time, cancel_user, is_identificat, identificat_time, identifica_user, right_unite, 
+    detail_address, business_system_devicenum, opsystem_name, opsystem_type, opsystem_version, 
+    opsystem_id, system_develop_unite, option_user, option_time, device_name, device_status, 
+    cpus, frequency, cache, arch, cpu_lmt, phy, virt, mem_lmt, volume, volume_lmt, distro, 
+    version, kernel, soft_version, temp, tem_low, tem_high
+  </sql>
+  <select id="selectByExample" parameterType="com.demo.common.entity.SgDeviceFilesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sg_device_files
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sg_device_files
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sg_device_files
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.demo.common.entity.SgDeviceFilesExample">
+    delete from sg_device_files
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.demo.common.entity.SgDeviceFiles">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sg_device_files (device_number, device_type, device_model, 
+      device_firm, business_system, communication_type, 
+      communication_agreement, communication_protocal, 
+      term_commte_address, master_address_ip, master_port, 
+      is_new_norm, import_time, device_address, 
+      province, city, region, 
+      gd_longitude, gd_latitude, principal, 
+      telephone, is_register, register_time, 
+      register_user, is_cancel, cancel_time, 
+      cancel_user, is_identificat, identificat_time, 
+      identifica_user, right_unite, detail_address, 
+      business_system_devicenum, opsystem_name, 
+      opsystem_type, opsystem_version, opsystem_id, 
+      system_develop_unite, option_user, option_time, 
+      device_name, device_status, cpus, 
+      frequency, cache, arch, 
+      cpu_lmt, phy, virt, 
+      mem_lmt, volume, volume_lmt, 
+      distro, version, kernel, 
+      soft_version, temp, tem_low, 
+      tem_high)
+    values (#{deviceNumber,jdbcType=VARCHAR}, #{deviceType,jdbcType=VARCHAR}, #{deviceModel,jdbcType=VARCHAR}, 
+      #{deviceFirm,jdbcType=VARCHAR}, #{businessSystem,jdbcType=VARCHAR}, #{communicationType,jdbcType=VARCHAR}, 
+      #{communicationAgreement,jdbcType=VARCHAR}, #{communicationProtocal,jdbcType=VARCHAR}, 
+      #{termCommteAddress,jdbcType=VARCHAR}, #{masterAddressIp,jdbcType=VARCHAR}, #{masterPort,jdbcType=VARCHAR}, 
+      #{isNewNorm,jdbcType=VARCHAR}, #{importTime,jdbcType=TIMESTAMP}, #{deviceAddress,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, 
+      #{gdLongitude,jdbcType=VARCHAR}, #{gdLatitude,jdbcType=VARCHAR}, #{principal,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{isRegister,jdbcType=VARCHAR}, #{registerTime,jdbcType=TIMESTAMP}, 
+      #{registerUser,jdbcType=VARCHAR}, #{isCancel,jdbcType=VARCHAR}, #{cancelTime,jdbcType=TIMESTAMP}, 
+      #{cancelUser,jdbcType=VARCHAR}, #{isIdentificat,jdbcType=VARCHAR}, #{identificatTime,jdbcType=TIMESTAMP}, 
+      #{identificaUser,jdbcType=VARCHAR}, #{rightUnite,jdbcType=VARCHAR}, #{detailAddress,jdbcType=VARCHAR}, 
+      #{businessSystemDevicenum,jdbcType=VARCHAR}, #{opsystemName,jdbcType=VARCHAR}, 
+      #{opsystemType,jdbcType=VARCHAR}, #{opsystemVersion,jdbcType=VARCHAR}, #{opsystemId,jdbcType=VARCHAR}, 
+      #{systemDevelopUnite,jdbcType=VARCHAR}, #{optionUser,jdbcType=VARCHAR}, #{optionTime,jdbcType=TIMESTAMP}, 
+      #{deviceName,jdbcType=VARCHAR}, #{deviceStatus,jdbcType=VARCHAR}, #{cpus,jdbcType=INTEGER}, 
+      #{frequency,jdbcType=INTEGER}, #{cache,jdbcType=INTEGER}, #{arch,jdbcType=VARCHAR}, 
+      #{cpuLmt,jdbcType=INTEGER}, #{phy,jdbcType=INTEGER}, #{virt,jdbcType=INTEGER}, 
+      #{memLmt,jdbcType=INTEGER}, #{volume,jdbcType=INTEGER}, #{volumeLmt,jdbcType=INTEGER}, 
+      #{distro,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, #{kernel,jdbcType=VARCHAR}, 
+      #{softVersion,jdbcType=VARCHAR}, #{temp,jdbcType=INTEGER}, #{temLow,jdbcType=INTEGER}, 
+      #{temHigh,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.demo.common.entity.SgDeviceFiles">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sg_device_files
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deviceNumber != null">
+        device_number,
+      </if>
+      <if test="deviceType != null">
+        device_type,
+      </if>
+      <if test="deviceModel != null">
+        device_model,
+      </if>
+      <if test="deviceFirm != null">
+        device_firm,
+      </if>
+      <if test="businessSystem != null">
+        business_system,
+      </if>
+      <if test="communicationType != null">
+        communication_type,
+      </if>
+      <if test="communicationAgreement != null">
+        communication_agreement,
+      </if>
+      <if test="communicationProtocal != null">
+        communication_protocal,
+      </if>
+      <if test="termCommteAddress != null">
+        term_commte_address,
+      </if>
+      <if test="masterAddressIp != null">
+        master_address_ip,
+      </if>
+      <if test="masterPort != null">
+        master_port,
+      </if>
+      <if test="isNewNorm != null">
+        is_new_norm,
+      </if>
+      <if test="importTime != null">
+        import_time,
+      </if>
+      <if test="deviceAddress != null">
+        device_address,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="region != null">
+        region,
+      </if>
+      <if test="gdLongitude != null">
+        gd_longitude,
+      </if>
+      <if test="gdLatitude != null">
+        gd_latitude,
+      </if>
+      <if test="principal != null">
+        principal,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="isRegister != null">
+        is_register,
+      </if>
+      <if test="registerTime != null">
+        register_time,
+      </if>
+      <if test="registerUser != null">
+        register_user,
+      </if>
+      <if test="isCancel != null">
+        is_cancel,
+      </if>
+      <if test="cancelTime != null">
+        cancel_time,
+      </if>
+      <if test="cancelUser != null">
+        cancel_user,
+      </if>
+      <if test="isIdentificat != null">
+        is_identificat,
+      </if>
+      <if test="identificatTime != null">
+        identificat_time,
+      </if>
+      <if test="identificaUser != null">
+        identifica_user,
+      </if>
+      <if test="rightUnite != null">
+        right_unite,
+      </if>
+      <if test="detailAddress != null">
+        detail_address,
+      </if>
+      <if test="businessSystemDevicenum != null">
+        business_system_devicenum,
+      </if>
+      <if test="opsystemName != null">
+        opsystem_name,
+      </if>
+      <if test="opsystemType != null">
+        opsystem_type,
+      </if>
+      <if test="opsystemVersion != null">
+        opsystem_version,
+      </if>
+      <if test="opsystemId != null">
+        opsystem_id,
+      </if>
+      <if test="systemDevelopUnite != null">
+        system_develop_unite,
+      </if>
+      <if test="optionUser != null">
+        option_user,
+      </if>
+      <if test="optionTime != null">
+        option_time,
+      </if>
+      <if test="deviceName != null">
+        device_name,
+      </if>
+      <if test="deviceStatus != null">
+        device_status,
+      </if>
+      <if test="cpus != null">
+        cpus,
+      </if>
+      <if test="frequency != null">
+        frequency,
+      </if>
+      <if test="cache != null">
+        cache,
+      </if>
+      <if test="arch != null">
+        arch,
+      </if>
+      <if test="cpuLmt != null">
+        cpu_lmt,
+      </if>
+      <if test="phy != null">
+        phy,
+      </if>
+      <if test="virt != null">
+        virt,
+      </if>
+      <if test="memLmt != null">
+        mem_lmt,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="volumeLmt != null">
+        volume_lmt,
+      </if>
+      <if test="distro != null">
+        distro,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="kernel != null">
+        kernel,
+      </if>
+      <if test="softVersion != null">
+        soft_version,
+      </if>
+      <if test="temp != null">
+        temp,
+      </if>
+      <if test="temLow != null">
+        tem_low,
+      </if>
+      <if test="temHigh != null">
+        tem_high,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deviceNumber != null">
+        #{deviceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceModel != null">
+        #{deviceModel,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceFirm != null">
+        #{deviceFirm,jdbcType=VARCHAR},
+      </if>
+      <if test="businessSystem != null">
+        #{businessSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationType != null">
+        #{communicationType,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationAgreement != null">
+        #{communicationAgreement,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationProtocal != null">
+        #{communicationProtocal,jdbcType=VARCHAR},
+      </if>
+      <if test="termCommteAddress != null">
+        #{termCommteAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="masterAddressIp != null">
+        #{masterAddressIp,jdbcType=VARCHAR},
+      </if>
+      <if test="masterPort != null">
+        #{masterPort,jdbcType=VARCHAR},
+      </if>
+      <if test="isNewNorm != null">
+        #{isNewNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="importTime != null">
+        #{importTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceAddress != null">
+        #{deviceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="gdLongitude != null">
+        #{gdLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="gdLatitude != null">
+        #{gdLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null">
+        #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="isRegister != null">
+        #{isRegister,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registerUser != null">
+        #{registerUser,jdbcType=VARCHAR},
+      </if>
+      <if test="isCancel != null">
+        #{isCancel,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelTime != null">
+        #{cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelUser != null">
+        #{cancelUser,jdbcType=VARCHAR},
+      </if>
+      <if test="isIdentificat != null">
+        #{isIdentificat,jdbcType=VARCHAR},
+      </if>
+      <if test="identificatTime != null">
+        #{identificatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="identificaUser != null">
+        #{identificaUser,jdbcType=VARCHAR},
+      </if>
+      <if test="rightUnite != null">
+        #{rightUnite,jdbcType=VARCHAR},
+      </if>
+      <if test="detailAddress != null">
+        #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="businessSystemDevicenum != null">
+        #{businessSystemDevicenum,jdbcType=VARCHAR},
+      </if>
+      <if test="opsystemName != null">
+        #{opsystemName,jdbcType=VARCHAR},
+      </if>
+      <if test="opsystemType != null">
+        #{opsystemType,jdbcType=VARCHAR},
+      </if>
+      <if test="opsystemVersion != null">
+        #{opsystemVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="opsystemId != null">
+        #{opsystemId,jdbcType=VARCHAR},
+      </if>
+      <if test="systemDevelopUnite != null">
+        #{systemDevelopUnite,jdbcType=VARCHAR},
+      </if>
+      <if test="optionUser != null">
+        #{optionUser,jdbcType=VARCHAR},
+      </if>
+      <if test="optionTime != null">
+        #{optionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceName != null">
+        #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceStatus != null">
+        #{deviceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="cpus != null">
+        #{cpus,jdbcType=INTEGER},
+      </if>
+      <if test="frequency != null">
+        #{frequency,jdbcType=INTEGER},
+      </if>
+      <if test="cache != null">
+        #{cache,jdbcType=INTEGER},
+      </if>
+      <if test="arch != null">
+        #{arch,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuLmt != null">
+        #{cpuLmt,jdbcType=INTEGER},
+      </if>
+      <if test="phy != null">
+        #{phy,jdbcType=INTEGER},
+      </if>
+      <if test="virt != null">
+        #{virt,jdbcType=INTEGER},
+      </if>
+      <if test="memLmt != null">
+        #{memLmt,jdbcType=INTEGER},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=INTEGER},
+      </if>
+      <if test="volumeLmt != null">
+        #{volumeLmt,jdbcType=INTEGER},
+      </if>
+      <if test="distro != null">
+        #{distro,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="kernel != null">
+        #{kernel,jdbcType=VARCHAR},
+      </if>
+      <if test="softVersion != null">
+        #{softVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="temp != null">
+        #{temp,jdbcType=INTEGER},
+      </if>
+      <if test="temLow != null">
+        #{temLow,jdbcType=INTEGER},
+      </if>
+      <if test="temHigh != null">
+        #{temHigh,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.demo.common.entity.SgDeviceFilesExample" resultType="java.lang.Long">
+    select count(*) from sg_device_files
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sg_device_files
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.deviceNumber != null">
+        device_number = #{record.deviceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceType != null">
+        device_type = #{record.deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceModel != null">
+        device_model = #{record.deviceModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceFirm != null">
+        device_firm = #{record.deviceFirm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessSystem != null">
+        business_system = #{record.businessSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.communicationType != null">
+        communication_type = #{record.communicationType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.communicationAgreement != null">
+        communication_agreement = #{record.communicationAgreement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.communicationProtocal != null">
+        communication_protocal = #{record.communicationProtocal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.termCommteAddress != null">
+        term_commte_address = #{record.termCommteAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.masterAddressIp != null">
+        master_address_ip = #{record.masterAddressIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.masterPort != null">
+        master_port = #{record.masterPort,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isNewNorm != null">
+        is_new_norm = #{record.isNewNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.importTime != null">
+        import_time = #{record.importTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deviceAddress != null">
+        device_address = #{record.deviceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null">
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.region != null">
+        region = #{record.region,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gdLongitude != null">
+        gd_longitude = #{record.gdLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gdLatitude != null">
+        gd_latitude = #{record.gdLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="record.principal != null">
+        principal = #{record.principal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null">
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isRegister != null">
+        is_register = #{record.isRegister,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registerTime != null">
+        register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.registerUser != null">
+        register_user = #{record.registerUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isCancel != null">
+        is_cancel = #{record.isCancel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cancelTime != null">
+        cancel_time = #{record.cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cancelUser != null">
+        cancel_user = #{record.cancelUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isIdentificat != null">
+        is_identificat = #{record.isIdentificat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identificatTime != null">
+        identificat_time = #{record.identificatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.identificaUser != null">
+        identifica_user = #{record.identificaUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rightUnite != null">
+        right_unite = #{record.rightUnite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailAddress != null">
+        detail_address = #{record.detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.businessSystemDevicenum != null">
+        business_system_devicenum = #{record.businessSystemDevicenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opsystemName != null">
+        opsystem_name = #{record.opsystemName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opsystemType != null">
+        opsystem_type = #{record.opsystemType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opsystemVersion != null">
+        opsystem_version = #{record.opsystemVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opsystemId != null">
+        opsystem_id = #{record.opsystemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.systemDevelopUnite != null">
+        system_develop_unite = #{record.systemDevelopUnite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optionUser != null">
+        option_user = #{record.optionUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optionTime != null">
+        option_time = #{record.optionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deviceName != null">
+        device_name = #{record.deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deviceStatus != null">
+        device_status = #{record.deviceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpus != null">
+        cpus = #{record.cpus,jdbcType=INTEGER},
+      </if>
+      <if test="record.frequency != null">
+        frequency = #{record.frequency,jdbcType=INTEGER},
+      </if>
+      <if test="record.cache != null">
+        cache = #{record.cache,jdbcType=INTEGER},
+      </if>
+      <if test="record.arch != null">
+        arch = #{record.arch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpuLmt != null">
+        cpu_lmt = #{record.cpuLmt,jdbcType=INTEGER},
+      </if>
+      <if test="record.phy != null">
+        phy = #{record.phy,jdbcType=INTEGER},
+      </if>
+      <if test="record.virt != null">
+        virt = #{record.virt,jdbcType=INTEGER},
+      </if>
+      <if test="record.memLmt != null">
+        mem_lmt = #{record.memLmt,jdbcType=INTEGER},
+      </if>
+      <if test="record.volume != null">
+        volume = #{record.volume,jdbcType=INTEGER},
+      </if>
+      <if test="record.volumeLmt != null">
+        volume_lmt = #{record.volumeLmt,jdbcType=INTEGER},
+      </if>
+      <if test="record.distro != null">
+        distro = #{record.distro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.version != null">
+        version = #{record.version,jdbcType=VARCHAR},
+      </if>
+      <if test="record.kernel != null">
+        kernel = #{record.kernel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.softVersion != null">
+        soft_version = #{record.softVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temp != null">
+        temp = #{record.temp,jdbcType=INTEGER},
+      </if>
+      <if test="record.temLow != null">
+        tem_low = #{record.temLow,jdbcType=INTEGER},
+      </if>
+      <if test="record.temHigh != null">
+        tem_high = #{record.temHigh,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sg_device_files
+    set id = #{record.id,jdbcType=BIGINT},
+      device_number = #{record.deviceNumber,jdbcType=VARCHAR},
+      device_type = #{record.deviceType,jdbcType=VARCHAR},
+      device_model = #{record.deviceModel,jdbcType=VARCHAR},
+      device_firm = #{record.deviceFirm,jdbcType=VARCHAR},
+      business_system = #{record.businessSystem,jdbcType=VARCHAR},
+      communication_type = #{record.communicationType,jdbcType=VARCHAR},
+      communication_agreement = #{record.communicationAgreement,jdbcType=VARCHAR},
+      communication_protocal = #{record.communicationProtocal,jdbcType=VARCHAR},
+      term_commte_address = #{record.termCommteAddress,jdbcType=VARCHAR},
+      master_address_ip = #{record.masterAddressIp,jdbcType=VARCHAR},
+      master_port = #{record.masterPort,jdbcType=VARCHAR},
+      is_new_norm = #{record.isNewNorm,jdbcType=VARCHAR},
+      import_time = #{record.importTime,jdbcType=TIMESTAMP},
+      device_address = #{record.deviceAddress,jdbcType=VARCHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      region = #{record.region,jdbcType=VARCHAR},
+      gd_longitude = #{record.gdLongitude,jdbcType=VARCHAR},
+      gd_latitude = #{record.gdLatitude,jdbcType=VARCHAR},
+      principal = #{record.principal,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      is_register = #{record.isRegister,jdbcType=VARCHAR},
+      register_time = #{record.registerTime,jdbcType=TIMESTAMP},
+      register_user = #{record.registerUser,jdbcType=VARCHAR},
+      is_cancel = #{record.isCancel,jdbcType=VARCHAR},
+      cancel_time = #{record.cancelTime,jdbcType=TIMESTAMP},
+      cancel_user = #{record.cancelUser,jdbcType=VARCHAR},
+      is_identificat = #{record.isIdentificat,jdbcType=VARCHAR},
+      identificat_time = #{record.identificatTime,jdbcType=TIMESTAMP},
+      identifica_user = #{record.identificaUser,jdbcType=VARCHAR},
+      right_unite = #{record.rightUnite,jdbcType=VARCHAR},
+      detail_address = #{record.detailAddress,jdbcType=VARCHAR},
+      business_system_devicenum = #{record.businessSystemDevicenum,jdbcType=VARCHAR},
+      opsystem_name = #{record.opsystemName,jdbcType=VARCHAR},
+      opsystem_type = #{record.opsystemType,jdbcType=VARCHAR},
+      opsystem_version = #{record.opsystemVersion,jdbcType=VARCHAR},
+      opsystem_id = #{record.opsystemId,jdbcType=VARCHAR},
+      system_develop_unite = #{record.systemDevelopUnite,jdbcType=VARCHAR},
+      option_user = #{record.optionUser,jdbcType=VARCHAR},
+      option_time = #{record.optionTime,jdbcType=TIMESTAMP},
+      device_name = #{record.deviceName,jdbcType=VARCHAR},
+      device_status = #{record.deviceStatus,jdbcType=VARCHAR},
+      cpus = #{record.cpus,jdbcType=INTEGER},
+      frequency = #{record.frequency,jdbcType=INTEGER},
+      cache = #{record.cache,jdbcType=INTEGER},
+      arch = #{record.arch,jdbcType=VARCHAR},
+      cpu_lmt = #{record.cpuLmt,jdbcType=INTEGER},
+      phy = #{record.phy,jdbcType=INTEGER},
+      virt = #{record.virt,jdbcType=INTEGER},
+      mem_lmt = #{record.memLmt,jdbcType=INTEGER},
+      volume = #{record.volume,jdbcType=INTEGER},
+      volume_lmt = #{record.volumeLmt,jdbcType=INTEGER},
+      distro = #{record.distro,jdbcType=VARCHAR},
+      version = #{record.version,jdbcType=VARCHAR},
+      kernel = #{record.kernel,jdbcType=VARCHAR},
+      soft_version = #{record.softVersion,jdbcType=VARCHAR},
+      temp = #{record.temp,jdbcType=INTEGER},
+      tem_low = #{record.temLow,jdbcType=INTEGER},
+      tem_high = #{record.temHigh,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.demo.common.entity.SgDeviceFiles">
+    update sg_device_files
+    <set>
+      <if test="deviceNumber != null">
+        device_number = #{deviceNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceType != null">
+        device_type = #{deviceType,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceModel != null">
+        device_model = #{deviceModel,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceFirm != null">
+        device_firm = #{deviceFirm,jdbcType=VARCHAR},
+      </if>
+      <if test="businessSystem != null">
+        business_system = #{businessSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationType != null">
+        communication_type = #{communicationType,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationAgreement != null">
+        communication_agreement = #{communicationAgreement,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationProtocal != null">
+        communication_protocal = #{communicationProtocal,jdbcType=VARCHAR},
+      </if>
+      <if test="termCommteAddress != null">
+        term_commte_address = #{termCommteAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="masterAddressIp != null">
+        master_address_ip = #{masterAddressIp,jdbcType=VARCHAR},
+      </if>
+      <if test="masterPort != null">
+        master_port = #{masterPort,jdbcType=VARCHAR},
+      </if>
+      <if test="isNewNorm != null">
+        is_new_norm = #{isNewNorm,jdbcType=VARCHAR},
+      </if>
+      <if test="importTime != null">
+        import_time = #{importTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceAddress != null">
+        device_address = #{deviceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="gdLongitude != null">
+        gd_longitude = #{gdLongitude,jdbcType=VARCHAR},
+      </if>
+      <if test="gdLatitude != null">
+        gd_latitude = #{gdLatitude,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null">
+        principal = #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="isRegister != null">
+        is_register = #{isRegister,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null">
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registerUser != null">
+        register_user = #{registerUser,jdbcType=VARCHAR},
+      </if>
+      <if test="isCancel != null">
+        is_cancel = #{isCancel,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelTime != null">
+        cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cancelUser != null">
+        cancel_user = #{cancelUser,jdbcType=VARCHAR},
+      </if>
+      <if test="isIdentificat != null">
+        is_identificat = #{isIdentificat,jdbcType=VARCHAR},
+      </if>
+      <if test="identificatTime != null">
+        identificat_time = #{identificatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="identificaUser != null">
+        identifica_user = #{identificaUser,jdbcType=VARCHAR},
+      </if>
+      <if test="rightUnite != null">
+        right_unite = #{rightUnite,jdbcType=VARCHAR},
+      </if>
+      <if test="detailAddress != null">
+        detail_address = #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="businessSystemDevicenum != null">
+        business_system_devicenum = #{businessSystemDevicenum,jdbcType=VARCHAR},
+      </if>
+      <if test="opsystemName != null">
+        opsystem_name = #{opsystemName,jdbcType=VARCHAR},
+      </if>
+      <if test="opsystemType != null">
+        opsystem_type = #{opsystemType,jdbcType=VARCHAR},
+      </if>
+      <if test="opsystemVersion != null">
+        opsystem_version = #{opsystemVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="opsystemId != null">
+        opsystem_id = #{opsystemId,jdbcType=VARCHAR},
+      </if>
+      <if test="systemDevelopUnite != null">
+        system_develop_unite = #{systemDevelopUnite,jdbcType=VARCHAR},
+      </if>
+      <if test="optionUser != null">
+        option_user = #{optionUser,jdbcType=VARCHAR},
+      </if>
+      <if test="optionTime != null">
+        option_time = #{optionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceName != null">
+        device_name = #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceStatus != null">
+        device_status = #{deviceStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="cpus != null">
+        cpus = #{cpus,jdbcType=INTEGER},
+      </if>
+      <if test="frequency != null">
+        frequency = #{frequency,jdbcType=INTEGER},
+      </if>
+      <if test="cache != null">
+        cache = #{cache,jdbcType=INTEGER},
+      </if>
+      <if test="arch != null">
+        arch = #{arch,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuLmt != null">
+        cpu_lmt = #{cpuLmt,jdbcType=INTEGER},
+      </if>
+      <if test="phy != null">
+        phy = #{phy,jdbcType=INTEGER},
+      </if>
+      <if test="virt != null">
+        virt = #{virt,jdbcType=INTEGER},
+      </if>
+      <if test="memLmt != null">
+        mem_lmt = #{memLmt,jdbcType=INTEGER},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=INTEGER},
+      </if>
+      <if test="volumeLmt != null">
+        volume_lmt = #{volumeLmt,jdbcType=INTEGER},
+      </if>
+      <if test="distro != null">
+        distro = #{distro,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="kernel != null">
+        kernel = #{kernel,jdbcType=VARCHAR},
+      </if>
+      <if test="softVersion != null">
+        soft_version = #{softVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="temp != null">
+        temp = #{temp,jdbcType=INTEGER},
+      </if>
+      <if test="temLow != null">
+        tem_low = #{temLow,jdbcType=INTEGER},
+      </if>
+      <if test="temHigh != null">
+        tem_high = #{temHigh,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.demo.common.entity.SgDeviceFiles">
+    update sg_device_files
+    set device_number = #{deviceNumber,jdbcType=VARCHAR},
+      device_type = #{deviceType,jdbcType=VARCHAR},
+      device_model = #{deviceModel,jdbcType=VARCHAR},
+      device_firm = #{deviceFirm,jdbcType=VARCHAR},
+      business_system = #{businessSystem,jdbcType=VARCHAR},
+      communication_type = #{communicationType,jdbcType=VARCHAR},
+      communication_agreement = #{communicationAgreement,jdbcType=VARCHAR},
+      communication_protocal = #{communicationProtocal,jdbcType=VARCHAR},
+      term_commte_address = #{termCommteAddress,jdbcType=VARCHAR},
+      master_address_ip = #{masterAddressIp,jdbcType=VARCHAR},
+      master_port = #{masterPort,jdbcType=VARCHAR},
+      is_new_norm = #{isNewNorm,jdbcType=VARCHAR},
+      import_time = #{importTime,jdbcType=TIMESTAMP},
+      device_address = #{deviceAddress,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      gd_longitude = #{gdLongitude,jdbcType=VARCHAR},
+      gd_latitude = #{gdLatitude,jdbcType=VARCHAR},
+      principal = #{principal,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      is_register = #{isRegister,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      register_user = #{registerUser,jdbcType=VARCHAR},
+      is_cancel = #{isCancel,jdbcType=VARCHAR},
+      cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+      cancel_user = #{cancelUser,jdbcType=VARCHAR},
+      is_identificat = #{isIdentificat,jdbcType=VARCHAR},
+      identificat_time = #{identificatTime,jdbcType=TIMESTAMP},
+      identifica_user = #{identificaUser,jdbcType=VARCHAR},
+      right_unite = #{rightUnite,jdbcType=VARCHAR},
+      detail_address = #{detailAddress,jdbcType=VARCHAR},
+      business_system_devicenum = #{businessSystemDevicenum,jdbcType=VARCHAR},
+      opsystem_name = #{opsystemName,jdbcType=VARCHAR},
+      opsystem_type = #{opsystemType,jdbcType=VARCHAR},
+      opsystem_version = #{opsystemVersion,jdbcType=VARCHAR},
+      opsystem_id = #{opsystemId,jdbcType=VARCHAR},
+      system_develop_unite = #{systemDevelopUnite,jdbcType=VARCHAR},
+      option_user = #{optionUser,jdbcType=VARCHAR},
+      option_time = #{optionTime,jdbcType=TIMESTAMP},
+      device_name = #{deviceName,jdbcType=VARCHAR},
+      device_status = #{deviceStatus,jdbcType=VARCHAR},
+      cpus = #{cpus,jdbcType=INTEGER},
+      frequency = #{frequency,jdbcType=INTEGER},
+      cache = #{cache,jdbcType=INTEGER},
+      arch = #{arch,jdbcType=VARCHAR},
+      cpu_lmt = #{cpuLmt,jdbcType=INTEGER},
+      phy = #{phy,jdbcType=INTEGER},
+      virt = #{virt,jdbcType=INTEGER},
+      mem_lmt = #{memLmt,jdbcType=INTEGER},
+      volume = #{volume,jdbcType=INTEGER},
+      volume_lmt = #{volumeLmt,jdbcType=INTEGER},
+      distro = #{distro,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      kernel = #{kernel,jdbcType=VARCHAR},
+      soft_version = #{softVersion,jdbcType=VARCHAR},
+      temp = #{temp,jdbcType=INTEGER},
+      tem_low = #{temLow,jdbcType=INTEGER},
+      tem_high = #{temHigh,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

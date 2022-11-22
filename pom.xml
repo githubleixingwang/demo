@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!--项目基本信息-->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.demo</groupId>
+	<artifactId>demo</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>demo</name>
+	<description>This is parent project</description>
+
+	<!-- 子模块清单（创建新子模块后，会自动填入）-->
+	<modules>
+		<module>common</module>
+		<module>eureka</module>
+		<module>moudle</module>
+		<module>gateway</module>
+        <module>vue</module>
+    </modules>
+
+	<!-- 父依赖 本项目的父模块使用spring-boot框架 -->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.10.RELEASE</version>
+	</parent>
+
+	<!-- 项目自定义属性 编码和jdk-->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+		<!-- 依赖的版本号：在定义版本时，要注意的是不同的依赖版本之间会有影响，有些最新的版本不支持其他依赖的低版本一起使用-->
+		<mysql.connector-java.version>8.0.27</mysql.connector-java.version>
+		<org.mybatis.spring.boot.version>1.3.1</org.mybatis.spring.boot.version>
+		<alibaba.druid.version>1.1.9</alibaba.druid.version>
+		<spring.boot.version>2.3.10.RELEASE</spring.boot.version>
+		<spring.cloud.version>Hoxton.SR11</spring.cloud.version>
+		<spring.boot.starter.data.jdbc.version>2.3.10.RELEASE</spring.boot.starter.data.jdbc.version>
+		<pagehelper.version>5.2.0</pagehelper.version>
+		<pagehelper.spring.boot.autoconfigure.version>1.3.0</pagehelper.spring.boot.autoconfigure.version>
+		<pagehelper.spring.boot.starter.version>1.3.0</pagehelper.spring.boot.starter.version>
+		<junit.version>4.12</junit.version>
+		<aspectjweaver.version>1.8.8</aspectjweaver.version>
+		<lombok.version>1.16.20</lombok.version>
+		<xstream.version>1.4.17</xstream.version>
+		<hystrix.javanica.version>1.5.12</hystrix.javanica.version>
+		<taos.jdbcdriver.version>2.0.22</taos.jdbcdriver.version>
+		<openfeign.version>2.2.8.RELEASE</openfeign.version>
+		<joda.time.version>2.9.9</joda.time.version>
+		<commons.lang.version>2.6</commons.lang.version>
+		<commons.io.version>2.5</commons.io.version>
+		<fastjson.version>1.2.29.sec06</fastjson.version>
+		<pinyin4j.version>2.5.1</pinyin4j.version>
+		<commons.codec.version>1.9</commons.codec.version>
+		<persistence.api.version>1.0</persistence.api.version>
+		<eureka.client.version>2.2.8.RELEASE</eureka.client.version>
+		<jackson.version>2.9.9</jackson.version>
+		<redis.version>2.2.2.RELEASE</redis.version>
+		<spring-session-core>2.3.3.RELEASE</spring-session-core>
+		<log4j2.version>2.17.1</log4j2.version>
+		<slf4j.version>1.7.32</slf4j.version>
+		<logback.version>1.2.10</logback.version>
+		<google.version>27.0.1-jre</google.version>
+
+	</properties>
+
+	<!-- 项目依赖项 -->
+	<dependencyManagement>    <!-- dependencyManagement只是声明依赖，并不实现引入,进行版本控制 -->
+		<dependencies>
+			<!-- Spring Cloud -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring.cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.boot.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-jdbc</artifactId>
+				<version>${spring.boot.starter.data.jdbc.version}</version>
+			</dependency>
+			<!-- Mysql驱动依赖 -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<scope>runtime</scope>
+				<version>${mysql.connector-java.version}</version>
+			</dependency>
+			<!-- 添加数据库连接池依赖 -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid</artifactId>
+				<version>${alibaba.druid.version}</version>
+			</dependency>
+			<!-- Mybatis启动器，会自动添加Mybatis相关的jar包-->
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>${org.mybatis.spring.boot.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+				<version>${spring.boot.version}</version>
+			</dependency>
+			<!--	eureka-client		-->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+				<version>${eureka.client.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.thoughtworks.xstream</groupId>
+						<artifactId>xstream</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- pagehelper分页插件 -->
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper</artifactId>
+				<version>${pagehelper.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper-spring-boot-autoconfigure</artifactId>
+				<version>${pagehelper.spring.boot.autoconfigure.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper-spring-boot-starter</artifactId>
+				<version>${pagehelper.spring.boot.starter.version}</version>
+			</dependency>
+			<!-- pagehelper分页插件结束 -->
+			<dependency>
+				<groupId>com.netflix.hystrix</groupId>
+				<artifactId>hystrix-javanica</artifactId>
+				<version>${hystrix.javanica.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.taosdata.jdbc</groupId>
+				<artifactId>taos-jdbcdriver</artifactId>
+				<version>${taos.jdbcdriver.version}</version>
+			</dependency>
+
+			<!-- 导入Feign依赖包 -->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-openfeign</artifactId>
+				<version>${openfeign.version}</version>
+			</dependency>
+			<!-- 在Java中处理日期和时间是很常见的需求，基础的工具类就是我们熟悉的Date和Calendar，然而这些工具类的api使用并不是很方便和强大，于是就诞生了Joda-Time这个专门处理日期时间的库。-->
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>${joda.time.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${commons.lang.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons.io.version}</version>
+			</dependency>
+
+			<!-- fastJson用于对JSON格式的数据进行解析和打包 -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
+
+			<!-- 用于转换拼音，调用PinyinHelper类的静态工具方法 -->
+			<dependency>
+				<groupId>com.belerweb</groupId>
+				<artifactId>pinyin4j</artifactId>
+				<version>${pinyin4j.version}</version>
+			</dependency>
+
+			<!-- redis -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-redis</artifactId>
+				<version>${redis.version}</version>
+			</dependency>
+
+			<!-- 用于摘要运算、编码解码 -->
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${commons.codec.version}</version>
+			</dependency>
+
+			<!-- JPA的宗旨是为POJO提供持久化标准规范，比如@Table注解 -->
+			<dependency>
+				<groupId>javax.persistence</groupId>
+				<artifactId>persistence-api</artifactId>
+				<version>${persistence.api.version}</version>
+			</dependency>
+
+<!--			&lt;!&ndash; thymeleaf：前后端数据交互模板引擎 &ndash;&gt;-->
+<!--			<dependency>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+<!--			</dependency>-->
+
+            <!--	jackson依赖		-->
+<!--			<dependency>-->
+<!--				<groupId>com.fasterxml.jackson.core</groupId>-->
+<!--				<artifactId>jackson-databind</artifactId>-->
+<!--				<version>${jackson.version}</version>-->
+<!--				<exclusions>-->
+<!--					<exclusion>-->
+<!--						<groupId>com.fasterxml.jackson.core</groupId>-->
+<!--						<artifactId>jackson-annotations</artifactId>-->
+<!--					</exclusion>-->
+<!--				</exclusions>-->
+<!--			</dependency>-->
+<!--			<dependency>-->
+<!--				<groupId>com.fasterxml.jackson.core</groupId>-->
+<!--				<artifactId>jackson-annotations</artifactId>-->
+<!--				<version>${jackson.version}</version>-->
+<!--			</dependency>-->
+			<!--使用cache-->
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${google.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<!-- Spring Boot -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+			<version>${spring.boot.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- 添加junit4依赖 单元测试-->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- 切面 -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectjweaver.version}</version>
+		</dependency>
+		<!-- 简化Entity代码（实体类添加@Data，编译时为所有字段添加@ToString/@EqualsAndHashCode/@Getter/为非final字段添加@Setter） -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>${xstream.version}</version>
+		</dependency>
+        <!--spring-session-->
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-core</artifactId>
+			<version>${spring-session-core}</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-to-slf4j</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j2.version}</version>
+		</dependency>
+
+	</dependencies>
+	<!-- <scope>主要管理依赖的部署
+	   * compile，缺省值，适用于所有阶段，会随着项目一起发布。
+	   * provided，类似compile，期望JDK、容器或使用者会提供这个依赖。如servlet.jar。
+	   * runtime，只在运行时使用，如JDBC驱动，适用运行和测试阶段。
+	   * test，只在测试时使用，用于编译和运行测试代码。不会随项目发布。
+	   * system，类似provided，需要显式提供包含依赖的jar，Maven不会在Repository中查找它。
+	-->
+
+	<build>
+		<plugins>
+			<!--打包跳过测试-->
+			<!--			<plugin>-->
+			<!--				<groupId>org.apache.maven.plugins</groupId>-->
+			<!--				<artifactId>maven-surefire-plugin</artifactId>-->
+			<!--				<configuration>-->
+			<!--					<skip>true</skip>-->
+			<!--				</configuration>-->
+			<!--			</plugin>-->
+			<!-- 能将项目达成jar包  -->
+			<!--<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.2.2.RELEASE</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<includeSystemScope>true</includeSystemScope>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>-->
+		</plugins>
+	</build>
+
+</project>

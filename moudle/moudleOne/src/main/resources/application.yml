@@ -1,0 +1,54 @@
+server:
+  port: 8666
+  #自定义访问路径，spring2.0格式
+#  servlet:
+#    context-path: /moudleOne
+
+spring:
+  application:
+    name: moudleone
+
+  datasource:
+    url:  jdbc:mysql://127.0.0.1:3306/eladmin?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+   #thymeleaf
+#  thymeleaf:
+#    prefix: classpath:/templates/
+#    suffix: .html
+#    cache: false
+#    servlet:
+#      content-type: text/html
+#    enabled: true
+#    encoding: UTF-8
+#    mode: HTML5
+
+#放开静态资源访问权限
+  resources:
+   # static-locations:  classpath:/templates/,/static/**,/resources/
+
+  devtools:
+    restart:
+      enabled: true
+  #eureka登录信息
+  security:
+    user:
+      name: admin
+      password: admin
+#mybatis:
+# mapper-locations: classpath:mapper/*.xml    #配置映射文件
+#  type-aliases-package: entity   #配置实体类
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+
+eureka:
+  client:
+    #连接信息
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@127.0.0.1:18280/eureka/
+    enabled: true

@@ -1,0 +1,41 @@
+server:
+  port: 18281
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+    gateway:
+      discovery:
+        locator:
+          #开启服务注册和发现的功能
+          enabled: true
+          #将请求路径上的服务名配置为小写
+          lower-case-service-id: true
+      routes:
+        - id: moudleone_router     #自定义
+          uri: lb://moudleone      #微服务模块名
+          predicates:
+            - Path=/aa/bb/**  #微服务实际访问路径
+         # filters:
+          #  - StripPrefix=1 #由127.0.0.1:18281/moudleone/moudle-one/test改为127.0.0.1:18281/moudleone/test，将实际请求前缀的第一个省略掉
+
+
+  #eureka登录信息
+  security:
+    user:
+      name: admin
+      password: admin
+
+
+eureka:
+  client:
+    #连接信息
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@127.0.0.1:18280/eureka/
+    enabled: true

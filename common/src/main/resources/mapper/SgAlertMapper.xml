@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.common.mapper.SgAlertMapper">
+  <resultMap id="BaseResultMap" type="com.demo.common.entity.SgAlert">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="dev_sn" jdbcType="VARCHAR" property="devSn" />
+    <result column="container_id" jdbcType="VARCHAR" property="containerId" />
+    <result column="alert_model" jdbcType="VARCHAR" property="alertModel" />
+    <result column="alert_time" jdbcType="TIMESTAMP" property="alertTime" />
+    <result column="ram_real" jdbcType="VARCHAR" property="ramReal" />
+    <result column="ram_threshold" jdbcType="VARCHAR" property="ramThreshold" />
+    <result column="disk_real" jdbcType="VARCHAR" property="diskReal" />
+    <result column="disk_threshold" jdbcType="VARCHAR" property="diskThreshold" />
+    <result column="cpu_real" jdbcType="VARCHAR" property="cpuReal" />
+    <result column="cpu_threshold" jdbcType="VARCHAR" property="cpuThreshold" />
+    <result column="temperature_real" jdbcType="VARCHAR" property="temperatureReal" />
+    <result column="temperature_threshold" jdbcType="VARCHAR" property="temperatureThreshold" />
+    <result column="lostPower_status" jdbcType="VARCHAR" property="lostpowerStatus" />
+    <result column="rank" jdbcType="VARCHAR" property="rank" />
+    <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="container_name" jdbcType="VARCHAR" property="containerName" />
+    <result column="topCap_status" jdbcType="VARCHAR" property="topcapStatus" />
+    <result column="tailCap_status" jdbcType="VARCHAR" property="tailcapStatus" />
+    <result column="temperature_type" jdbcType="VARCHAR" property="temperatureType" />
+    <result column="cpu_rate" jdbcType="INTEGER" property="cpuRate" />
+    <result column="mem_used_phy" jdbcType="INTEGER" property="memUsedPhy" />
+    <result column="mem_used_virt" jdbcType="INTEGER" property="memUsedVirt" />
+    <result column="disk_used" jdbcType="INTEGER" property="diskUsed" />
+    <result column="temp_value" jdbcType="INTEGER" property="tempValue" />
+    <result column="link_state_name" jdbcType="VARCHAR" property="linkStateName" />
+    <result column="link_state_status" jdbcType="VARCHAR" property="linkStateStatus" />
+    <result column="event" jdbcType="VARCHAR" property="event" />
+    <result column="msg" jdbcType="VARCHAR" property="msg" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, dev_sn, container_id, alert_model, alert_time, ram_real, ram_threshold, disk_real, 
+    disk_threshold, cpu_real, cpu_threshold, temperature_real, temperature_threshold, 
+    lostPower_status, rank, app_name, container_name, topCap_status, tailCap_status, 
+    temperature_type, cpu_rate, mem_used_phy, mem_used_virt, disk_used, temp_value, link_state_name, 
+    link_state_status, event, msg
+  </sql>
+  <select id="selectByExample" parameterType="com.demo.common.entity.SgAlertExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sg_alert
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sg_alert
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sg_alert
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.demo.common.entity.SgAlertExample">
+    delete from sg_alert
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.demo.common.entity.SgAlert">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sg_alert (dev_sn, container_id, alert_model, 
+      alert_time, ram_real, ram_threshold, 
+      disk_real, disk_threshold, cpu_real, 
+      cpu_threshold, temperature_real, temperature_threshold, 
+      lostPower_status, rank, app_name, 
+      container_name, topCap_status, tailCap_status, 
+      temperature_type, cpu_rate, mem_used_phy, 
+      mem_used_virt, disk_used, temp_value, 
+      link_state_name, link_state_status, event, 
+      msg)
+    values (#{devSn,jdbcType=VARCHAR}, #{containerId,jdbcType=VARCHAR}, #{alertModel,jdbcType=VARCHAR}, 
+      #{alertTime,jdbcType=TIMESTAMP}, #{ramReal,jdbcType=VARCHAR}, #{ramThreshold,jdbcType=VARCHAR}, 
+      #{diskReal,jdbcType=VARCHAR}, #{diskThreshold,jdbcType=VARCHAR}, #{cpuReal,jdbcType=VARCHAR}, 
+      #{cpuThreshold,jdbcType=VARCHAR}, #{temperatureReal,jdbcType=VARCHAR}, #{temperatureThreshold,jdbcType=VARCHAR}, 
+      #{lostpowerStatus,jdbcType=VARCHAR}, #{rank,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR}, 
+      #{containerName,jdbcType=VARCHAR}, #{topcapStatus,jdbcType=VARCHAR}, #{tailcapStatus,jdbcType=VARCHAR}, 
+      #{temperatureType,jdbcType=VARCHAR}, #{cpuRate,jdbcType=INTEGER}, #{memUsedPhy,jdbcType=INTEGER}, 
+      #{memUsedVirt,jdbcType=INTEGER}, #{diskUsed,jdbcType=INTEGER}, #{tempValue,jdbcType=INTEGER}, 
+      #{linkStateName,jdbcType=VARCHAR}, #{linkStateStatus,jdbcType=VARCHAR}, #{event,jdbcType=VARCHAR}, 
+      #{msg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.demo.common.entity.SgAlert">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sg_alert
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="devSn != null">
+        dev_sn,
+      </if>
+      <if test="containerId != null">
+        container_id,
+      </if>
+      <if test="alertModel != null">
+        alert_model,
+      </if>
+      <if test="alertTime != null">
+        alert_time,
+      </if>
+      <if test="ramReal != null">
+        ram_real,
+      </if>
+      <if test="ramThreshold != null">
+        ram_threshold,
+      </if>
+      <if test="diskReal != null">
+        disk_real,
+      </if>
+      <if test="diskThreshold != null">
+        disk_threshold,
+      </if>
+      <if test="cpuReal != null">
+        cpu_real,
+      </if>
+      <if test="cpuThreshold != null">
+        cpu_threshold,
+      </if>
+      <if test="temperatureReal != null">
+        temperature_real,
+      </if>
+      <if test="temperatureThreshold != null">
+        temperature_threshold,
+      </if>
+      <if test="lostpowerStatus != null">
+        lostPower_status,
+      </if>
+      <if test="rank != null">
+        rank,
+      </if>
+      <if test="appName != null">
+        app_name,
+      </if>
+      <if test="containerName != null">
+        container_name,
+      </if>
+      <if test="topcapStatus != null">
+        topCap_status,
+      </if>
+      <if test="tailcapStatus != null">
+        tailCap_status,
+      </if>
+      <if test="temperatureType != null">
+        temperature_type,
+      </if>
+      <if test="cpuRate != null">
+        cpu_rate,
+      </if>
+      <if test="memUsedPhy != null">
+        mem_used_phy,
+      </if>
+      <if test="memUsedVirt != null">
+        mem_used_virt,
+      </if>
+      <if test="diskUsed != null">
+        disk_used,
+      </if>
+      <if test="tempValue != null">
+        temp_value,
+      </if>
+      <if test="linkStateName != null">
+        link_state_name,
+      </if>
+      <if test="linkStateStatus != null">
+        link_state_status,
+      </if>
+      <if test="event != null">
+        event,
+      </if>
+      <if test="msg != null">
+        msg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="devSn != null">
+        #{devSn,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null">
+        #{containerId,jdbcType=VARCHAR},
+      </if>
+      <if test="alertModel != null">
+        #{alertModel,jdbcType=VARCHAR},
+      </if>
+      <if test="alertTime != null">
+        #{alertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ramReal != null">
+        #{ramReal,jdbcType=VARCHAR},
+      </if>
+      <if test="ramThreshold != null">
+        #{ramThreshold,jdbcType=VARCHAR},
+      </if>
+      <if test="diskReal != null">
+        #{diskReal,jdbcType=VARCHAR},
+      </if>
+      <if test="diskThreshold != null">
+        #{diskThreshold,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuReal != null">
+        #{cpuReal,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuThreshold != null">
+        #{cpuThreshold,jdbcType=VARCHAR},
+      </if>
+      <if test="temperatureReal != null">
+        #{temperatureReal,jdbcType=VARCHAR},
+      </if>
+      <if test="temperatureThreshold != null">
+        #{temperatureThreshold,jdbcType=VARCHAR},
+      </if>
+      <if test="lostpowerStatus != null">
+        #{lostpowerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null">
+        #{rank,jdbcType=VARCHAR},
+      </if>
+      <if test="appName != null">
+        #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerName != null">
+        #{containerName,jdbcType=VARCHAR},
+      </if>
+      <if test="topcapStatus != null">
+        #{topcapStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tailcapStatus != null">
+        #{tailcapStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="temperatureType != null">
+        #{temperatureType,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuRate != null">
+        #{cpuRate,jdbcType=INTEGER},
+      </if>
+      <if test="memUsedPhy != null">
+        #{memUsedPhy,jdbcType=INTEGER},
+      </if>
+      <if test="memUsedVirt != null">
+        #{memUsedVirt,jdbcType=INTEGER},
+      </if>
+      <if test="diskUsed != null">
+        #{diskUsed,jdbcType=INTEGER},
+      </if>
+      <if test="tempValue != null">
+        #{tempValue,jdbcType=INTEGER},
+      </if>
+      <if test="linkStateName != null">
+        #{linkStateName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkStateStatus != null">
+        #{linkStateStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="event != null">
+        #{event,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null">
+        #{msg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.demo.common.entity.SgAlertExample" resultType="java.lang.Long">
+    select count(*) from sg_alert
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sg_alert
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.devSn != null">
+        dev_sn = #{record.devSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.containerId != null">
+        container_id = #{record.containerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alertModel != null">
+        alert_model = #{record.alertModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alertTime != null">
+        alert_time = #{record.alertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ramReal != null">
+        ram_real = #{record.ramReal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ramThreshold != null">
+        ram_threshold = #{record.ramThreshold,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diskReal != null">
+        disk_real = #{record.diskReal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.diskThreshold != null">
+        disk_threshold = #{record.diskThreshold,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpuReal != null">
+        cpu_real = #{record.cpuReal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpuThreshold != null">
+        cpu_threshold = #{record.cpuThreshold,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temperatureReal != null">
+        temperature_real = #{record.temperatureReal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temperatureThreshold != null">
+        temperature_threshold = #{record.temperatureThreshold,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lostpowerStatus != null">
+        lostPower_status = #{record.lostpowerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rank != null">
+        rank = #{record.rank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appName != null">
+        app_name = #{record.appName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.containerName != null">
+        container_name = #{record.containerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topcapStatus != null">
+        topCap_status = #{record.topcapStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tailcapStatus != null">
+        tailCap_status = #{record.tailcapStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.temperatureType != null">
+        temperature_type = #{record.temperatureType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cpuRate != null">
+        cpu_rate = #{record.cpuRate,jdbcType=INTEGER},
+      </if>
+      <if test="record.memUsedPhy != null">
+        mem_used_phy = #{record.memUsedPhy,jdbcType=INTEGER},
+      </if>
+      <if test="record.memUsedVirt != null">
+        mem_used_virt = #{record.memUsedVirt,jdbcType=INTEGER},
+      </if>
+      <if test="record.diskUsed != null">
+        disk_used = #{record.diskUsed,jdbcType=INTEGER},
+      </if>
+      <if test="record.tempValue != null">
+        temp_value = #{record.tempValue,jdbcType=INTEGER},
+      </if>
+      <if test="record.linkStateName != null">
+        link_state_name = #{record.linkStateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkStateStatus != null">
+        link_state_status = #{record.linkStateStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.event != null">
+        event = #{record.event,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msg != null">
+        msg = #{record.msg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sg_alert
+    set id = #{record.id,jdbcType=BIGINT},
+      dev_sn = #{record.devSn,jdbcType=VARCHAR},
+      container_id = #{record.containerId,jdbcType=VARCHAR},
+      alert_model = #{record.alertModel,jdbcType=VARCHAR},
+      alert_time = #{record.alertTime,jdbcType=TIMESTAMP},
+      ram_real = #{record.ramReal,jdbcType=VARCHAR},
+      ram_threshold = #{record.ramThreshold,jdbcType=VARCHAR},
+      disk_real = #{record.diskReal,jdbcType=VARCHAR},
+      disk_threshold = #{record.diskThreshold,jdbcType=VARCHAR},
+      cpu_real = #{record.cpuReal,jdbcType=VARCHAR},
+      cpu_threshold = #{record.cpuThreshold,jdbcType=VARCHAR},
+      temperature_real = #{record.temperatureReal,jdbcType=VARCHAR},
+      temperature_threshold = #{record.temperatureThreshold,jdbcType=VARCHAR},
+      lostPower_status = #{record.lostpowerStatus,jdbcType=VARCHAR},
+      rank = #{record.rank,jdbcType=VARCHAR},
+      app_name = #{record.appName,jdbcType=VARCHAR},
+      container_name = #{record.containerName,jdbcType=VARCHAR},
+      topCap_status = #{record.topcapStatus,jdbcType=VARCHAR},
+      tailCap_status = #{record.tailcapStatus,jdbcType=VARCHAR},
+      temperature_type = #{record.temperatureType,jdbcType=VARCHAR},
+      cpu_rate = #{record.cpuRate,jdbcType=INTEGER},
+      mem_used_phy = #{record.memUsedPhy,jdbcType=INTEGER},
+      mem_used_virt = #{record.memUsedVirt,jdbcType=INTEGER},
+      disk_used = #{record.diskUsed,jdbcType=INTEGER},
+      temp_value = #{record.tempValue,jdbcType=INTEGER},
+      link_state_name = #{record.linkStateName,jdbcType=VARCHAR},
+      link_state_status = #{record.linkStateStatus,jdbcType=VARCHAR},
+      event = #{record.event,jdbcType=VARCHAR},
+      msg = #{record.msg,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.demo.common.entity.SgAlert">
+    update sg_alert
+    <set>
+      <if test="devSn != null">
+        dev_sn = #{devSn,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null">
+        container_id = #{containerId,jdbcType=VARCHAR},
+      </if>
+      <if test="alertModel != null">
+        alert_model = #{alertModel,jdbcType=VARCHAR},
+      </if>
+      <if test="alertTime != null">
+        alert_time = #{alertTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ramReal != null">
+        ram_real = #{ramReal,jdbcType=VARCHAR},
+      </if>
+      <if test="ramThreshold != null">
+        ram_threshold = #{ramThreshold,jdbcType=VARCHAR},
+      </if>
+      <if test="diskReal != null">
+        disk_real = #{diskReal,jdbcType=VARCHAR},
+      </if>
+      <if test="diskThreshold != null">
+        disk_threshold = #{diskThreshold,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuReal != null">
+        cpu_real = #{cpuReal,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuThreshold != null">
+        cpu_threshold = #{cpuThreshold,jdbcType=VARCHAR},
+      </if>
+      <if test="temperatureReal != null">
+        temperature_real = #{temperatureReal,jdbcType=VARCHAR},
+      </if>
+      <if test="temperatureThreshold != null">
+        temperature_threshold = #{temperatureThreshold,jdbcType=VARCHAR},
+      </if>
+      <if test="lostpowerStatus != null">
+        lostPower_status = #{lostpowerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="rank != null">
+        rank = #{rank,jdbcType=VARCHAR},
+      </if>
+      <if test="appName != null">
+        app_name = #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="containerName != null">
+        container_name = #{containerName,jdbcType=VARCHAR},
+      </if>
+      <if test="topcapStatus != null">
+        topCap_status = #{topcapStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="tailcapStatus != null">
+        tailCap_status = #{tailcapStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="temperatureType != null">
+        temperature_type = #{temperatureType,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuRate != null">
+        cpu_rate = #{cpuRate,jdbcType=INTEGER},
+      </if>
+      <if test="memUsedPhy != null">
+        mem_used_phy = #{memUsedPhy,jdbcType=INTEGER},
+      </if>
+      <if test="memUsedVirt != null">
+        mem_used_virt = #{memUsedVirt,jdbcType=INTEGER},
+      </if>
+      <if test="diskUsed != null">
+        disk_used = #{diskUsed,jdbcType=INTEGER},
+      </if>
+      <if test="tempValue != null">
+        temp_value = #{tempValue,jdbcType=INTEGER},
+      </if>
+      <if test="linkStateName != null">
+        link_state_name = #{linkStateName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkStateStatus != null">
+        link_state_status = #{linkStateStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="event != null">
+        event = #{event,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null">
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.demo.common.entity.SgAlert">
+    update sg_alert
+    set dev_sn = #{devSn,jdbcType=VARCHAR},
+      container_id = #{containerId,jdbcType=VARCHAR},
+      alert_model = #{alertModel,jdbcType=VARCHAR},
+      alert_time = #{alertTime,jdbcType=TIMESTAMP},
+      ram_real = #{ramReal,jdbcType=VARCHAR},
+      ram_threshold = #{ramThreshold,jdbcType=VARCHAR},
+      disk_real = #{diskReal,jdbcType=VARCHAR},
+      disk_threshold = #{diskThreshold,jdbcType=VARCHAR},
+      cpu_real = #{cpuReal,jdbcType=VARCHAR},
+      cpu_threshold = #{cpuThreshold,jdbcType=VARCHAR},
+      temperature_real = #{temperatureReal,jdbcType=VARCHAR},
+      temperature_threshold = #{temperatureThreshold,jdbcType=VARCHAR},
+      lostPower_status = #{lostpowerStatus,jdbcType=VARCHAR},
+      rank = #{rank,jdbcType=VARCHAR},
+      app_name = #{appName,jdbcType=VARCHAR},
+      container_name = #{containerName,jdbcType=VARCHAR},
+      topCap_status = #{topcapStatus,jdbcType=VARCHAR},
+      tailCap_status = #{tailcapStatus,jdbcType=VARCHAR},
+      temperature_type = #{temperatureType,jdbcType=VARCHAR},
+      cpu_rate = #{cpuRate,jdbcType=INTEGER},
+      mem_used_phy = #{memUsedPhy,jdbcType=INTEGER},
+      mem_used_virt = #{memUsedVirt,jdbcType=INTEGER},
+      disk_used = #{diskUsed,jdbcType=INTEGER},
+      temp_value = #{tempValue,jdbcType=INTEGER},
+      link_state_name = #{linkStateName,jdbcType=VARCHAR},
+      link_state_status = #{linkStateStatus,jdbcType=VARCHAR},
+      event = #{event,jdbcType=VARCHAR},
+      msg = #{msg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

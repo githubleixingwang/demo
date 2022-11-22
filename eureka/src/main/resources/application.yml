@@ -1,0 +1,31 @@
+server:
+  port: 18280
+  #自定义访问路径，spring2.0格式
+#  servlet:
+#    context-path: /eureka
+
+spring:
+  application:
+    name: eureka
+  #把spring boot自动初始化DataSource相关的代码禁止掉,不禁止会有报错信息
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+  security:
+    user:
+      name: admin
+      password: admin
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    #不需要向注册中心注册
+    register-with-eureka: false
+    #不需要去检索服务
+    fetch-registry: false
+    #连接信息
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+      #是否启用eureka web界面
+  dashboard:
+    enabled: true

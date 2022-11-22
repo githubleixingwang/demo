@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.common.mapper.BugInfoMapper">
+  <resultMap id="BaseResultMap" type="com.demo.common.entity.BugInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="bug_tag" jdbcType="VARCHAR" property="bugTag" />
+    <result column="ascr_project" jdbcType="VARCHAR" property="ascrProject" />
+    <result column="principal" jdbcType="VARCHAR" property="principal" />
+    <result column="bug_level" jdbcType="VARCHAR" property="bugLevel" />
+    <result column="end_time" jdbcType="DATE" property="endTime" />
+    <result column="bug_state" jdbcType="VARCHAR" property="bugState" />
+    <result column="bug_confirm" jdbcType="VARCHAR" property="bugConfirm" />
+    <result column="bug_desc" jdbcType="VARCHAR" property="bugDesc" />
+    <result column="bug_desc_url" jdbcType="VARCHAR" property="bugDescUrl" />
+    <result column="bug_solve_plan" jdbcType="VARCHAR" property="bugSolvePlan" />
+    <result column="bug_solve_plan_url" jdbcType="VARCHAR" property="bugSolvePlanUrl" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="created" jdbcType="DATE" property="created" />
+    <result column="updated" jdbcType="DATE" property="updated" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, bug_tag, ascr_project, principal, bug_level, end_time, bug_state, bug_confirm, 
+    bug_desc, bug_desc_url, bug_solve_plan, bug_solve_plan_url, create_user, created, 
+    updated
+  </sql>
+  <select id="selectByExample" parameterType="com.demo.common.entity.BugInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bug_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bug_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from bug_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.demo.common.entity.BugInfoExample">
+    delete from bug_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.demo.common.entity.BugInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bug_info (bug_tag, ascr_project, principal, 
+      bug_level, end_time, bug_state, 
+      bug_confirm, bug_desc, bug_desc_url, 
+      bug_solve_plan, bug_solve_plan_url, create_user, 
+      created, updated)
+    values (#{bugTag,jdbcType=VARCHAR}, #{ascrProject,jdbcType=VARCHAR}, #{principal,jdbcType=VARCHAR}, 
+      #{bugLevel,jdbcType=VARCHAR}, #{endTime,jdbcType=DATE}, #{bugState,jdbcType=VARCHAR}, 
+      #{bugConfirm,jdbcType=VARCHAR}, #{bugDesc,jdbcType=VARCHAR}, #{bugDescUrl,jdbcType=VARCHAR}, 
+      #{bugSolvePlan,jdbcType=VARCHAR}, #{bugSolvePlanUrl,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{created,jdbcType=DATE}, #{updated,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.demo.common.entity.BugInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bug_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bugTag != null">
+        bug_tag,
+      </if>
+      <if test="ascrProject != null">
+        ascr_project,
+      </if>
+      <if test="principal != null">
+        principal,
+      </if>
+      <if test="bugLevel != null">
+        bug_level,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="bugState != null">
+        bug_state,
+      </if>
+      <if test="bugConfirm != null">
+        bug_confirm,
+      </if>
+      <if test="bugDesc != null">
+        bug_desc,
+      </if>
+      <if test="bugDescUrl != null">
+        bug_desc_url,
+      </if>
+      <if test="bugSolvePlan != null">
+        bug_solve_plan,
+      </if>
+      <if test="bugSolvePlanUrl != null">
+        bug_solve_plan_url,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="created != null">
+        created,
+      </if>
+      <if test="updated != null">
+        updated,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bugTag != null">
+        #{bugTag,jdbcType=VARCHAR},
+      </if>
+      <if test="ascrProject != null">
+        #{ascrProject,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null">
+        #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="bugLevel != null">
+        #{bugLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=DATE},
+      </if>
+      <if test="bugState != null">
+        #{bugState,jdbcType=VARCHAR},
+      </if>
+      <if test="bugConfirm != null">
+        #{bugConfirm,jdbcType=VARCHAR},
+      </if>
+      <if test="bugDesc != null">
+        #{bugDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="bugDescUrl != null">
+        #{bugDescUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="bugSolvePlan != null">
+        #{bugSolvePlan,jdbcType=VARCHAR},
+      </if>
+      <if test="bugSolvePlanUrl != null">
+        #{bugSolvePlanUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        #{created,jdbcType=DATE},
+      </if>
+      <if test="updated != null">
+        #{updated,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.demo.common.entity.BugInfoExample" resultType="java.lang.Long">
+    select count(*) from bug_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update bug_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.bugTag != null">
+        bug_tag = #{record.bugTag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ascrProject != null">
+        ascr_project = #{record.ascrProject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.principal != null">
+        principal = #{record.principal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bugLevel != null">
+        bug_level = #{record.bugLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endTime != null">
+        end_time = #{record.endTime,jdbcType=DATE},
+      </if>
+      <if test="record.bugState != null">
+        bug_state = #{record.bugState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bugConfirm != null">
+        bug_confirm = #{record.bugConfirm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bugDesc != null">
+        bug_desc = #{record.bugDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bugDescUrl != null">
+        bug_desc_url = #{record.bugDescUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bugSolvePlan != null">
+        bug_solve_plan = #{record.bugSolvePlan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bugSolvePlanUrl != null">
+        bug_solve_plan_url = #{record.bugSolvePlanUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.created != null">
+        created = #{record.created,jdbcType=DATE},
+      </if>
+      <if test="record.updated != null">
+        updated = #{record.updated,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update bug_info
+    set id = #{record.id,jdbcType=BIGINT},
+      bug_tag = #{record.bugTag,jdbcType=VARCHAR},
+      ascr_project = #{record.ascrProject,jdbcType=VARCHAR},
+      principal = #{record.principal,jdbcType=VARCHAR},
+      bug_level = #{record.bugLevel,jdbcType=VARCHAR},
+      end_time = #{record.endTime,jdbcType=DATE},
+      bug_state = #{record.bugState,jdbcType=VARCHAR},
+      bug_confirm = #{record.bugConfirm,jdbcType=VARCHAR},
+      bug_desc = #{record.bugDesc,jdbcType=VARCHAR},
+      bug_desc_url = #{record.bugDescUrl,jdbcType=VARCHAR},
+      bug_solve_plan = #{record.bugSolvePlan,jdbcType=VARCHAR},
+      bug_solve_plan_url = #{record.bugSolvePlanUrl,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      created = #{record.created,jdbcType=DATE},
+      updated = #{record.updated,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.demo.common.entity.BugInfo">
+    update bug_info
+    <set>
+      <if test="bugTag != null">
+        bug_tag = #{bugTag,jdbcType=VARCHAR},
+      </if>
+      <if test="ascrProject != null">
+        ascr_project = #{ascrProject,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null">
+        principal = #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="bugLevel != null">
+        bug_level = #{bugLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=DATE},
+      </if>
+      <if test="bugState != null">
+        bug_state = #{bugState,jdbcType=VARCHAR},
+      </if>
+      <if test="bugConfirm != null">
+        bug_confirm = #{bugConfirm,jdbcType=VARCHAR},
+      </if>
+      <if test="bugDesc != null">
+        bug_desc = #{bugDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="bugDescUrl != null">
+        bug_desc_url = #{bugDescUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="bugSolvePlan != null">
+        bug_solve_plan = #{bugSolvePlan,jdbcType=VARCHAR},
+      </if>
+      <if test="bugSolvePlanUrl != null">
+        bug_solve_plan_url = #{bugSolvePlanUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null">
+        created = #{created,jdbcType=DATE},
+      </if>
+      <if test="updated != null">
+        updated = #{updated,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.demo.common.entity.BugInfo">
+    update bug_info
+    set bug_tag = #{bugTag,jdbcType=VARCHAR},
+      ascr_project = #{ascrProject,jdbcType=VARCHAR},
+      principal = #{principal,jdbcType=VARCHAR},
+      bug_level = #{bugLevel,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=DATE},
+      bug_state = #{bugState,jdbcType=VARCHAR},
+      bug_confirm = #{bugConfirm,jdbcType=VARCHAR},
+      bug_desc = #{bugDesc,jdbcType=VARCHAR},
+      bug_desc_url = #{bugDescUrl,jdbcType=VARCHAR},
+      bug_solve_plan = #{bugSolvePlan,jdbcType=VARCHAR},
+      bug_solve_plan_url = #{bugSolvePlanUrl,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      created = #{created,jdbcType=DATE},
+      updated = #{updated,jdbcType=DATE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
