@@ -18,7 +18,8 @@
 		<module>moudle</module>
 		<module>gateway</module>
         <module>vue</module>
-    </modules>
+		<module>test</module>
+	</modules>
 
 	<!-- 父依赖 本项目的父模块使用spring-boot框架 -->
 	<parent>

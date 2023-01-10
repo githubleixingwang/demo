@@ -1,0 +1,46 @@
+server:
+  port: 8669
+  #自定义访问路径，spring2.0格式
+#  servlet:
+#    context-path: /
+
+spring:
+  application:
+    name: test
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+#  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    url: jdbc:mysql://127.0.0.1:3306/zentao?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+#    username: root
+#    password: 123456
+
+  autoconfigure:
+    exclude:
+  aop:
+    proxy-target-class: false
+
+#pagehelper:
+#  params: count=countSql
+#  reasonable: true
+#  support-methods-arguments: true
+#  auto-dialect: true
+#
+#mybatis:
+#  #配置映射文件
+#  mapper-locations: classpath*:mapper/*.xml
+##  type-aliases-package: entity   #配置实体类
+##mybatis:
+##  mapper-locations: classpath*:com/demo/vue/dao/*.xml
+
+eureka:
+  client:
+    #连接信息
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@127.0.0.1:18280/eureka/
+    enabled: false
+
