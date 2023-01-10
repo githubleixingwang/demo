@@ -1,6 +1,5 @@
 package com.demo.test.tcp;
 
-import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.*;
@@ -33,11 +32,6 @@ public class Test {
         System.out.println(((long)a*1000) * 60 * 60 * 24);
 
         long realTime = System.currentTimeMillis() + a * 1000 * 60 * 60 * 24;*/
-
-        Map<Integer, testEnum> map1 = testEnum.map;
-
-        testEnum system = testEnum.valueOf("SYSTEM");
-        System.out.println(EnumUtils.isValidEnum(testEnum.class, "system"));
 
         int max=1;
         System.out.println(++max);
@@ -104,48 +98,6 @@ public class Test {
 
         public void setB(String b) {
             this.b = b;
-        }
-    }
-
-
-    public enum testEnum {
-        SYSTEM(0,"aa"),
-        CUSTOM(1,"bb");
-
-        private int code;
-        private String key;
-        private static Map<Integer, testEnum> map = new HashMap<>();
-
-        testEnum(int code, String key) {
-            this.code = code;
-            this.key = key;
-        }
-
-        public int getCode() {
-            return code;
-        }
-
-        public void setCode(int code) {
-            this.code = code;
-        }
-
-        public String getKey() {
-            return key;
-        }
-
-        public void setKey(String key) {
-            this.key = key;
-        }
-
-        public static String getName(Integer code) {
-            testEnum orgSourceEnum = map.get(code);
-            return orgSourceEnum.getKey();
-        }
-
-        static {
-            for (testEnum value : values()) {
-                map.put(value.getCode(), value);
-            }
         }
     }
 
