@@ -125,7 +125,22 @@
             <version>3.4</version>
         </dependency>
         <!--****** httpclient end******-->
-
+        <!--****** easyexcel start ******-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>3.1.5</version>
+        </dependency>
+        <!--****** easyexcel end ******-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -136,6 +151,8 @@
                     <include>**/*.yml</include>
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
+                    <include>**</include>
+
                 </includes>
                 <filtering>false</filtering>
             </resource>
