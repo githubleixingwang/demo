@@ -11,11 +11,11 @@ spring:
     loadbalancer:
       ribbon:
         enabled: false
-#  datasource:
-#    type: com.alibaba.druid.pool.DruidDataSource
-#    url: jdbc:mysql://127.0.0.1:3306/zentao?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
-#    username: root
-#    password: 123456
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3308/tsoc?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: tsoc
+    password: fake.PWD.fool.4.U
 
   autoconfigure:
     exclude:
@@ -28,12 +28,12 @@ spring:
 #  support-methods-arguments: true
 #  auto-dialect: true
 #
+mybatis:
+  #配置映射文件
+  mapper-locations: classpath*:mapper/*.xml
+#  type-aliases-package: entity   #配置实体类
 #mybatis:
-#  #配置映射文件
-#  mapper-locations: classpath*:mapper/*.xml
-##  type-aliases-package: entity   #配置实体类
-##mybatis:
-##  mapper-locations: classpath*:com/demo/vue/dao/*.xml
+#  mapper-locations: classpath*:com/demo/vue/dao/*.xml
 
 eureka:
   client:

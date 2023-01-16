@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.test.sqlsession1.EmployeeMapper">
+    <delete id="delete"></delete>
+    <insert id="saveBatch" parameterType="List">
+        INSERT INTO `tsoc`.`test`( `name`) VALUES ('a');
+    </insert>
+
+</mapper>
