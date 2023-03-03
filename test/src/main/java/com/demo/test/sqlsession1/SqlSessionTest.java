@@ -90,6 +90,7 @@ public class SqlSessionTest {
         for (int i = 0; i < n; i++) {
             List<T> value = null;
             if (remaider > 0) {
+                //sublist左闭右开
                 value = source.subList(i * number + offset, (i + 1) * number + offset + 1);
                 remaider--;
                 offset++;
