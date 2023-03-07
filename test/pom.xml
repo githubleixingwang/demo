@@ -160,6 +160,25 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.7.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-grid</artifactId>
+            <version>4.7.1</version>
+        </dependency>
+        <!--下面这个依赖会根据你电脑安装的浏览器版本自动选择驱动（驱动管理）-->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.2.3</version>
+        </dependency>
+
+
+
     </dependencies>
 
     <build>
