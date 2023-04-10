@@ -1,19 +1,20 @@
 package com.demo.test.util.img;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author: lxw
- * @date: 2023-02-27  10:33
+ * @author LXW
+ * @date 2023/3/21
  */
 public class ImgUtil {
 
@@ -37,7 +38,7 @@ public class ImgUtil {
             // 得到<img />数据
             img = m_image.group();
             // 匹配<img>中的src数据
-            Matcher m = Pattern.compile("src\\s*=\\s*\"?(.*?)(\"|>|\\s+)").matcher(img);
+            Matcher m = Pattern.compile("src\\s*=\\s*\\\\\"?(.*?)(\"|>|\\s+)").matcher(img);
             while (m.find()) {
                 list.add(m.group(1));
             }
@@ -55,7 +56,7 @@ public class ImgUtil {
         String[] baseStrs = base64.split(","); //base64编码后的图片有头信息所以要分离出来   [0]data:image/png;base64, 图片内容为索引[1]
         byte[] b = new byte[0];
         try {
-            b = Base64.getDecoder().decode(baseStrs[1]);//取索引为1的元素进行处理
+            b = Base64.decodeBase64(baseStrs[1]);//取索引为1的元素进行处理
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,7 +65,8 @@ public class ImgUtil {
                 b[i] += 256;
             }
         }
-        return new Base64DecodeMultipartFile(b, baseStrs[0]);//处理过后的数据通过Base64DecodeMultipartFile转换为MultipartFile对象
+        String originalFilename = UUID.randomUUID().toString().replaceAll("-", "") + "." + baseStrs[0].split("/")[1].split(";")[0];
+        return new Base64DecodeMultipartFile(b, baseStrs[0], originalFilename);//处理过后的数据通过Base64DecodeMultipartFile转换为MultipartFile对象
     }
 
     /**
@@ -96,7 +98,7 @@ public class ImgUtil {
             }
         }
 
-        return Base64.getEncoder().encodeToString(data);
+        return Base64.encodeBase64String(data);
     }
 
 }

@@ -1,31 +1,34 @@
 package com.demo.test.util.img;
 
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.util.UUID;
 
 /**
- * @author: lxw
- * @date: 2023-02-27  13:56
+ * @author LXW
+ * @date 2023/3/21
  */
 public class Base64DecodeMultipartFile implements MultipartFile {
     private final byte[] imgContent;
     private final String header;
+    private final String originalFilename;
 
-    public Base64DecodeMultipartFile(byte[] imgContent, String header) {
+    public Base64DecodeMultipartFile(byte[] imgContent, String header, String originalFilename) {
         this.imgContent = imgContent;
         this.header = header.split(";")[0];
+        this.originalFilename = originalFilename;
     }
 
     @Override
     public String getName() {
-        return System.currentTimeMillis() + (int)Math.random()  + "." + header.split("/")[1];
+        return System.currentTimeMillis() + (int) Math.random() + "." + header.split("/")[1];
     }
 
     @Override
     public String getOriginalFilename() {
-        return UUID.randomUUID().toString().replaceAll("-","")+ "." + header.split("/")[1];
+        return this.originalFilename;
     }
 
     @Override
@@ -55,8 +58,8 @@ public class Base64DecodeMultipartFile implements MultipartFile {
 
     @Override
     public void transferTo(File dest) throws IOException, IllegalStateException {
-
-        new FileOutputStream(dest).write(imgContent);
+        FileCopyUtils.copy(this.imgContent, dest);
+        // new FileOutputStream(dest).write(imgContent);
 
     }
 
