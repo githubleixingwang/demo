@@ -64,16 +64,16 @@ stop() {
 
     let kwait=$SHUTDOWN_WAIT
     count=0;
+    echo -n -e "\n\e[00;31mwaiting for processes to exit\e[00m";
     until [ `ps -p $pid | grep -c $pid` = '0' ] || [ $count -gt $kwait ]
     do
-      echo -n -e "\n\e[00;31mwaiting for processes to exit\e[00m";
       sleep 1
       let count=$count+1;
     done
 
     if [ $count -gt $kwait ]; then
-      echo -n -e "\n\e[00;31mkilling processes which didn't stop after $SHUTDOWN_WAIT seconds\e[00m"
       kill -9 $pid
+      echo -n -e "\n\e[00;31mtomcat stop success\e[00m"
     fi
   else
     echo -e "\e[00;31mTomcat is not running\e[00m"
