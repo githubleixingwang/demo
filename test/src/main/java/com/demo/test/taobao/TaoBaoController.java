@@ -175,7 +175,7 @@ public class TaoBaoController {
                             }
 
                             WebDriverWait wait = new WebDriverWait(browser, 2);
-                            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'" + targetTime + "')]/parent::div/parent::div/div[2]/div[12]/div[2]")));
+                            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'" + targetTime + "')]/parent::div/parent::div/div[2]/div[7]/div[2]")));
                             ((JavascriptExecutor) browser).executeScript("arguments[0].click();", element);
                             WebDriverWait wait2 = new WebDriverWait(browser, 5);
                             WebElement element2 = wait2.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),\"确定\")]")));

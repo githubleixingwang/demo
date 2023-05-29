@@ -65,6 +65,7 @@
 		<slf4j.version>1.7.32</slf4j.version>
 		<logback.version>1.2.10</logback.version>
 		<google.version>27.0.1-jre</google.version>
+		<easypoi.version>4.4.0</easypoi.version>
 
 	</properties>
 
@@ -318,7 +319,11 @@
 			<artifactId>log4j-core</artifactId>
 			<version>${log4j2.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>cn.afterturn</groupId>
+			<artifactId>easypoi-spring-boot-starter</artifactId>
+			<version>${easypoi.version}</version>
+		</dependency>
 	</dependencies>
 	<!-- <scope>主要管理依赖的部署
 	   * compile，缺省值，适用于所有阶段，会随着项目一起发布。

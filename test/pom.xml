@@ -177,7 +177,18 @@
             <version>5.2.3</version>
         </dependency>-->
 
-
+        <!-- https://mvnrepository.com/artifact/com.google.re2j/re2j -->
+        <dependency>
+            <groupId>com.google.re2j</groupId>
+            <artifactId>re2j</artifactId>
+            <version>1.6</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.ant/ant -->
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.7.0</version>
+        </dependency>
 
     </dependencies>
 
