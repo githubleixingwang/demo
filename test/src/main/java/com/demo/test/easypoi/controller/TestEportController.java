@@ -1,10 +1,16 @@
-package com.demo.test;
+package com.demo.test.easypoi.controller;
 
 import cn.afterturn.easypoi.excel.entity.ExportParams;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.demo.test.nodeData.GraphAnalysisDict;
-import com.demo.test.nodeData.easypoi.*;
+import com.demo.test.easypoi.data.GraphNode;
+import com.demo.test.easypoi.data.nodeConstant;
+import com.demo.test.easypoi.data.sheet.AddressSheetData;
+import com.demo.test.easypoi.service.A;
+import com.demo.test.easypoi.util.ExcelStyle;
+import com.demo.test.easypoi.data.sheet.CommonSheetData;
+import com.demo.test.easypoi.data.sheet.ServiceSheetData;
+import com.demo.test.easypoi.util.WriteCsvUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +32,7 @@ import java.util.stream.Collectors;
  * @date: 2023-05-29  14:27
  */
 @RestController
-public class Test {
+public class TestEportController {
 
     @Resource
     private A aa;
@@ -35,11 +41,9 @@ public class Test {
         String a = "[{\"types\": [\"Address\"],\"id\": \"1250\",\"type\": \"Address\",\"props\": {\"byAttackCount\": \"0\",\"firstTime\": \"2022-04-22 10:51:02\",\"showName\": \"192.168.19.27\",\"firstTimeLong\": 1650595862000,\"dataSourceStr\": \"资产\",\"assetName\": \"mysql-test\",\"endTime\": \"2022-06-22 12:51:02\",\"addr\": \"192.168.19.27\",\"endTimeLong\": 1655873462000,\"dataSource\": \"asset\"}\n" +
                 "}, {\"types\": [\"Service\"],\"id\": \"1251\",\"type\": \"Service\",\"props\": {\"firstTime\": \"2022-04-22 10:51:02\",\"showName\": \"mysql_3306\",\"firstTimeLong\": 1650595862000,\"dataSourceStr\": \"监控\",\"port\": \"3306\",\"name\": \"mysql\",\"endTime\": \"2022-06-22 12:51:02\",\"dataSource\": \"monitor\",\"endTimeLong\": 1655873462000}\n" +
                 "}, {\"types\": [\"Service\"],\"id\": \"1304\",\"type\": \"Service\",\"props\": {\"firstTime\": \"2022-04-22 10:51:02\",\"showName\": \"oracle_1521\",\"firstTimeLong\": 1650595862000,\"dataSourceStr\": \"监控\",\"port\": \"1521\",\"name\": \"oracle\",\"endTime\": \"2022-04-22 13:55:24\",\"dataSource\": \"monitor\",\"endTimeLong\": 1650606924000}\n" +
-                "}, {\"types\": [\"Attacker\"],\"id\": \"1307\",\"type\": \"Attacker\",\"props\": {\"firstTime\": \"2022-01-20 10:00:00\",\"showName\": \"41.86.18.209\",\"firstTimeLong\": 1642644000000,\"endTime\": \"2022-02-10 10:00:00\",\"addr\": \"41.86.18.209\",\"endTimeLong\": 1644458400000}\n" +
                 "}, {\"types\": [\"Address\"],\"id\": \"1301\",\"type\": \"Address\",\"props\": {\"byAttackCount\": \"0\",\"firstTime\": \"2022-04-22 10:51:02\",\"showName\": \"192.168.53.122\",\"firstTimeLong\": 1650595862000,\"dataSourceStr\": \"资产\",\"assetName\": \"53.122网御星云_pfc106_30\",\"endTime\": \"2022-04-22 10:51:02\",\"addr\": \"192.168.53.122\",\"endTimeLong\": 1650595862000,\"dataSource\": \"asset\"}\n" +
                 "}, {\"types\": [\"Address\"],\"id\": \"1302\",\"type\": \"Address\",\"props\": {\"byAttackCount\": \"0\",\"firstTime\": \"2022-04-22 10:51:02\",\"showName\": \"192.168.114.65\",\"firstTimeLong\": 1650595862000,\"dataSourceStr\": \"资产\",\"assetName\": \"65suse_pfc106_30\",\"endTime\": \"2022-04-22 10:52:08\",\"addr\": \"192.168.114.65\",\"endTimeLong\": 1650595928000,\"dataSource\": \"asset\"}\n" +
                 "}, {\"types\": [\"Address\"],\"id\": \"1303\",\"type\": \"Address\",\"props\": {\"byAttackCount\": \"0\",\"firstTime\": \"2022-04-22 10:51:02\",\"showName\": \"192.168.114.69\",\"firstTimeLong\": 1650595862000,\"dataSourceStr\": \"资产\",\"assetName\": \"69windows2012r2standard_pfc106_30\",\"endTime\": \"2022-04-22 10:52:10\",\"addr\": \"192.168.114.69\",\"endTimeLong\": 1650595930000,\"dataSource\": \"asset\"}\n" +
-                "}, {\"types\": [\"Weakness\"],\"id\": \"1306\",\"type\": \"Weakness\",\"props\": {\"firstTime\": \"2021-09-28 14:41:19\",\"showName\": \"ICMP权限许可和访问控制漏洞CVE-1999-0524\",\"firstTimeLong\": 1632811279000,\"weaknessType\": \"sysVulnCase\",\"name\": \"ICMP权限许可和访问控制漏洞CVE-1999-0524\",\"endTime\": \"2021-11-10 10:00:00\",\"endTimeLong\": 1636509600000,\"weaknessTypeStr\": \"漏扫\"}\n" +
                 "}]";
         List<GraphNode> nodes = JSONArray.parseArray(a, GraphNode.class);
         Map<String, List<GraphNode>> map = nodes.stream().collect(Collectors.groupingBy(GraphNode::getType));
@@ -77,13 +81,13 @@ public class Test {
             final List<Map<String, Object>> sheetsList = new ArrayList<>();
 
             for (String key : map.keySet()) {
-                List<ExportSheetData> sheetDataList = new ArrayList<>();
+                List<CommonSheetData> sheetDataList = new ArrayList<>();
                 Map<String, Object> exportMap = new HashMap<>();
                 final ExportParams exportParams = new ExportParams(null, null, key);
                 exportParams.setStyle(ExcelStyle.class);
                 // 以下3个参数为API中写死的参数名 分别是sheet配置/导出类（注解定义）/数据集
                 exportMap.put("title", exportParams);
-                if (GraphAnalysisDict.LABEL_ADDRESS.equals(key)) {
+                if (nodeConstant.LABEL_ADDRESS.equals(key)) {
                     map.get(key).forEach(graphNode -> {
                         Map<String, Object> props = graphNode.getProps();
                         AddressSheetData sheetData = JSON.parseObject(JSON.toJSONString(props), AddressSheetData.class);
@@ -92,7 +96,7 @@ public class Test {
                     exportMap.put("entity", AddressSheetData.class);
 
                 }
-                if (GraphAnalysisDict.LABEL_SERVICE.equals(key)) {
+                if (nodeConstant.LABEL_SERVICE.equals(key)) {
                     map.get(key).forEach(graphNode -> {
                         Map<String, Object> props = graphNode.getProps();
                         ServiceSheetData sheetData = JSON.parseObject(JSON.toJSONString(props), ServiceSheetData.class);

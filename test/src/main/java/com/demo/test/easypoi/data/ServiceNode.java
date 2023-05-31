@@ -1,4 +1,4 @@
-package com.demo.test.nodeData;
+package com.demo.test.easypoi.data;
 
 public class ServiceNode extends CommonProperty {
 

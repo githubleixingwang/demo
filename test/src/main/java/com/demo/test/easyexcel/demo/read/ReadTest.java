@@ -1,9 +1,5 @@
 package com.demo.test.easyexcel.demo.read;
 
-import java.io.File;
-import java.util.List;
-import java.util.Map;
-
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.annotation.ExcelProperty;
@@ -17,11 +13,14 @@ import com.alibaba.excel.read.listener.ReadListener;
 import com.alibaba.excel.read.metadata.ReadSheet;
 import com.alibaba.excel.util.ListUtils;
 import com.alibaba.fastjson.JSON;
-
 import com.demo.test.easyexcel.util.TestFileUtil;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+
+import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 读的常见写法
@@ -41,7 +40,7 @@ public class ReadTest {
      * <p>
      * 3. 直接读即可
      */
-    @Test
+   @Test
     public void simpleRead() {
         // 写法1：JDK8+ ,不用额外写一个DemoDataListener
         // since: 3.0.0-beta1

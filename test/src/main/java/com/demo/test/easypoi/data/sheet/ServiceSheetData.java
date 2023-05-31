@@ -1,11 +1,11 @@
-package com.demo.test.nodeData.easypoi;
+package com.demo.test.easypoi.data.sheet;
 
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.Data;
 
 @Data
-public class ServiceSheetData extends ExportSheetData {
+public class ServiceSheetData extends CommonSheetData {
 
     @Excel(name = "服务名称", width = 30.0, orderNum = "1")
     private String name;

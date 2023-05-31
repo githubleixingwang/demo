@@ -1,4 +1,4 @@
-package com.demo.test.nodeData.easypoi;
+package com.demo.test.easypoi.data.sheet;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.Data;
@@ -8,7 +8,7 @@ import lombok.Data;
  * @date: 2023-05-29  10:14
  */
 @Data
-public class ExportSheetData {
+public class CommonSheetData {
 
     /**
      * 首次出现的时间，格式为：yyyy-MM-dd HH:mm:ss
