@@ -6,6 +6,9 @@
         <sortPriority>V1.0</sortPriority>
         <Param key="ServiceCommand" value="service"/>
         <Param key="NetstatCommand" value="netstat"/>
+        <array item="a"/>
+        <array item="b"/>
+        <array item="c"/>
     </Parameters>
 
     <Shared>

@@ -1,7 +1,9 @@
 package com.demo.test.xmldigester.bean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,6 +13,7 @@ import java.util.Map;
 public class Parameters implements Serializable {
     private String version;
     private String sortPriority;
+    private List<String> list = new ArrayList<>();
 
     private Map<String,String> param = new HashMap<>();
 
@@ -37,6 +40,14 @@ public class Parameters implements Serializable {
     public void setParam(Map<String, String> param) {
         this.param = param;
     }
+    public List<String> getList() {
+        return list;
+    }
+
+    public void setList(List<String> list) {
+        this.list = list;
+    }
+
     public void putParam(String key, String value)
     {
         param.put(key, value);
@@ -47,11 +58,16 @@ public class Parameters implements Serializable {
         return param.get(key);
     }
 
+    public void addList(String item){
+        this.list.add(item);
+    }
+
     @Override
     public String toString() {
         return "Parameters{" +
                 "version='" + version + '\'' +
                 ", sortPriority='" + sortPriority + '\'' +
+                ", list=" + list +
                 ", param=" + param +
                 '}';
     }

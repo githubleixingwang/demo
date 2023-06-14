@@ -26,6 +26,8 @@ public class DigesterRule {
         digester.addCallMethod("DigesterObj/Parameters/Param", "putParam", 2);//匹配到节点时会调用stack栈顶元素对象的methodName方法（反射），（有参，指定参数个数与CallParamRule规则配合使用，设置参数值）
         digester.addCallParam("DigesterObj/Parameters/Param", 0, "key");//当匹配到模式时，配置参数下标及对应的节点名称，设置putParam方法的参数
         digester.addCallParam("DigesterObj/Parameters/Param", 1, "value");
+        digester.addCallMethod("DigesterObj/Parameters/array", "addList", 1);
+        digester.addCallParam("DigesterObj/Parameters/array", 0, "item");
         digester.addSetNext("DigesterObj/Parameters", "setParameters");//当匹配到模式，调用栈顶元素的上一个元素的methodName方法并以栈顶元素作为参数（反射）,弹出栈顶的对象
 
         digester.addObjectCreate("DigesterObj/Shared", Shared.class);
