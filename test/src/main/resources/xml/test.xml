@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<DigesterObj>
+    <Parameters>
+        <version>V1.0</version>
+        <sortPriority>V1.0</sortPriority>
+        <Param key="ServiceCommand" value="service"/>
+        <Param key="NetstatCommand" value="netstat"/>
+    </Parameters>
+
+    <Shared>
+        <Res aaa="aaa">
+            <ShellCommand>
+                <Command>vmstat 1 2</Command>
+            </ShellCommand>
+        </Res>
+    </Shared>
+</DigesterObj>
