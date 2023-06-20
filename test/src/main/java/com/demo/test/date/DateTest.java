@@ -1,13 +1,24 @@
 package com.demo.test.date;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import com.google.common.collect.Maps;
+import org.apache.commons.compress.utils.Lists;
+
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 public class DateTest {
+    public static final String YYYY_MM1 = "yyyy年MM月";
+    public static final String YYYY_MM2 = "yyyy_MM";
+    public static final String YYYY_MM3 = "yyyy-MM";
 
+    public static final String YY_MM1 = "yy年MM月";
+    public static final String YY_MM2 = "yy_MM";
+    public static final String YY_MM3 = "yy-MM";
     /*
     * jdk8时间处理方式
     * LocalDateTime、LocalDate、LocalTime
@@ -53,5 +64,30 @@ public class DateTest {
         Integer f1 =100,f2=100,f3=300,f4=300;
         System.out.println(f1 == f2);
         System.out.println(f3 == f4);
+    }
+
+    public static List<String> getTimeList(int mouth, String format) {
+        List<String> list = Lists.newArrayList();
+        LocalDate now = LocalDate.now();
+        for (int i = 0; i < mouth; i++) {
+            LocalDate date = now.minusMonths(i);
+            String str = date.format(DateTimeFormatter.ofPattern(format));
+            list.add(str);
+        }
+        Collections.reverse(list);
+        return list;
+    }
+
+    public static Map<String,Long> getTime(String date, String format) {
+        Map<String,Long> map = Maps.newHashMap();
+        YearMonth yearMonth = YearMonth.parse(date, DateTimeFormatter.ofPattern(format));
+        LocalDate dateTime = yearMonth.atEndOfMonth();
+        LocalDate min = dateTime.with(TemporalAdjusters.firstDayOfMonth());
+        LocalDate max = dateTime.with(TemporalAdjusters.firstDayOfNextMonth());
+        long start = min.atStartOfDay(ZoneOffset.ofHours(8)).toInstant().toEpochMilli();
+        long end = max.atStartOfDay(ZoneOffset.ofHours(8)).toInstant().toEpochMilli();
+        map.put("start",start);
+        map.put("end",end);
+        return map;
     }
 }
