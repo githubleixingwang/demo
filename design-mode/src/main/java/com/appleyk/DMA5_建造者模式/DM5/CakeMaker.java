@@ -1,5 +1,8 @@
 package com.appleyk.DMA5_建造者模式.DM5;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * <p>蛋糕师 == 根据builder定义的制作工序制作蛋糕</p>
  *
@@ -8,6 +11,8 @@ package com.appleyk.DMA5_建造者模式.DM5;
  * @blob https://blog.csdn.net/appleyk
  * @date Created on 下午 1:53 2018-11-9
  */
+@Data
+@NoArgsConstructor
 public class CakeMaker implements ICakeBuilder {
 
     /**蛋糕师傅的姓名*/
@@ -16,18 +21,7 @@ public class CakeMaker implements ICakeBuilder {
     /**蛋糕师要制作的蛋糕，蛋糕师不关心蛋糕最后去了哪，他只需要把做好的蛋糕放在货架上即可*/
     private Cake cake = new Cake();
 
-    public CakeMaker() {
-    }
-
     public CakeMaker(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 

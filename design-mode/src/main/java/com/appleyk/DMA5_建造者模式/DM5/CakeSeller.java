@@ -10,9 +10,6 @@ package com.appleyk.DMA5_建造者模式.DM5;
  */
 public class CakeSeller {
 
-    public CakeSeller() {
-    }
-
     public Cake sell(ICakeBuilder cakeBuilder) {
         cakeBuilder.knead();
         cakeBuilder.ferment();

@@ -1,7 +1,7 @@
 package com.appleyk.DMA8_代理模式.DM8.SP静态代理;
 
-import com.appleyk.DMA8_代理模式.DM8.service.CommodityService;
-import com.appleyk.DMA8_代理模式.DM8.service.impl.DogImpl;
+import com.appleyk.DMA8_代理模式.DM8.DP动态代理.jdk.service.CommodityService;
+import com.appleyk.DMA8_代理模式.DM8.DP动态代理.jdk.service.impl.DogImpl;
 
 /**
  * <p>宠物狗代理类 == 静态代理模式</p>

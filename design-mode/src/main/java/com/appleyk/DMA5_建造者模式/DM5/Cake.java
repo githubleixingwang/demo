@@ -1,5 +1,8 @@
 package com.appleyk.DMA5_建造者模式.DM5;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +14,8 @@ import java.util.List;
  * @date Created on 下午 1:45 2018-11-9
  * @version v0.1.1
  */
+@Data
+@NoArgsConstructor
 public class Cake {
 
     /**
@@ -18,15 +23,6 @@ public class Cake {
      */
     private List<String> parts = new ArrayList<>();
 
-    public Cake(){}
-
-    public List<String> getParts() {
-        return parts;
-    }
-
-    public void setParts(List<String> parts) {
-        this.parts = parts;
-    }
 
     public void addProcess(String process){
         this.parts.add(process);

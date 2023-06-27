@@ -1,11 +1,15 @@
 package com.appleyk.DMA8_代理模式;
 
-import com.appleyk.DMA8_代理模式.DM8.ProxyFactory;
+import com.appleyk.DMA8_代理模式.DM8.DP动态代理.cglib.CglibImpl;
+import com.appleyk.DMA8_代理模式.DM8.DP动态代理.cglib.CglibProxyFactory;
+import com.appleyk.DMA8_代理模式.DM8.DP动态代理.jdk.JdkProxyFactory;
 import com.appleyk.DMA8_代理模式.DM8.NP非代理.UserOwn;
+import com.appleyk.DMA8_代理模式.DM8.SP静态代理.DogProxy;
+import com.appleyk.DMA8_代理模式.DM8.SP静态代理.UserProxy;
 import com.appleyk.DMA8_代理模式.DM8.VP虚拟代理.Secretary;
-import com.appleyk.DMA8_代理模式.DM8.service.CommodityService;
-import com.appleyk.DMA8_代理模式.DM8.service.impl.DogImpl;
-import com.appleyk.DMA8_代理模式.DM8.service.impl.UserImpl;
+import com.appleyk.DMA8_代理模式.DM8.DP动态代理.jdk.service.CommodityService;
+import com.appleyk.DMA8_代理模式.DM8.DP动态代理.jdk.service.impl.DogImpl;
+import com.appleyk.DMA8_代理模式.DM8.DP动态代理.jdk.service.impl.UserImpl;
 
 /**
  * <p>代理模式测试</p>
@@ -26,7 +30,8 @@ public class ProxyTest {
         // 2、使用静态代理
         useStaticProxy(uName, dName);
         // 3、使用动态代理
-        useDynamicProxy(uName, dName);
+        useJdkDynamicProxy(uName, dName);
+        useCglibDynamicProxy();
 
         int second = 5;
         // 4、使用虚拟代理
@@ -70,10 +75,10 @@ public class ProxyTest {
      */
     private static void useStaticProxy(String uName, String dName) {
         // 使用静态代理模式，通过UU跑腿服务，用户拿到自己要的薯片
-        ProxyFactory.getUserProxy().getCommodity(uName);
+        new UserProxy().getCommodity(uName);
         System.out.println("===========分割线");
         // 使用静态代理模式，通过UU跑腿服务，宠物狗拿到自己要的狗粮
-        ProxyFactory.getDogProxy().getCommodity(dName);
+        new DogProxy().getCommodity(dName);
         System.out.println("===========分割线");
     }
 
@@ -83,18 +88,23 @@ public class ProxyTest {
      * @param uName 用户商品名称
      * @param dName 宠物狗商品名称
      */
-    private static void useDynamicProxy(String uName, String dName) {
+    private static void useJdkDynamicProxy(String uName, String dName) {
         // 使用动态代理模式，通过UU跑腿服务，用户拿到自己要的薯片
-        CommodityService userProxy = (CommodityService) (ProxyFactory.getDynProxy(new UserImpl()));
+        CommodityService userProxy = (CommodityService) JdkProxyFactory.getProxy(new UserImpl());
         userProxy.getCommodity(uName);
-        System.out.println("===========分割线");
+        System.out.println("===========jdk动态代理分割线");
 
         // 使用动态代理模式，通过UU跑腿服务，宠物狗拿到自己要的狗粮
-        CommodityService dogProxy = (CommodityService) (ProxyFactory.getDynProxy(new DogImpl()));
+        CommodityService dogProxy = (CommodityService) (JdkProxyFactory.getProxy(new DogImpl()));
         dogProxy.getCommodity(dName);
-        System.out.println("===========分割线");
+        System.out.println("===========jdk动态代理分割线");
     }
-
+    private static void useCglibDynamicProxy( ) {
+        // 使用动态代理模式，通过UU跑腿服务，用户拿到自己要的薯片
+        CglibImpl proxy1 = (CglibImpl)CglibProxyFactory.getProxy(CglibImpl.class);
+        proxy1.send("cglib动态代理，不需要类实现接口");
+        System.out.println("===========cglib动态代理分割线");
+    }
     /**
      * 使用虚拟代理
      *

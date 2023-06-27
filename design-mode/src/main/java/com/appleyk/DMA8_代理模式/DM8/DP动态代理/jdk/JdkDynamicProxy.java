@@ -1,17 +1,17 @@
-package com.appleyk.DMA8_代理模式.DM8.DP动态代理;
+package com.appleyk.DMA8_代理模式.DM8.DP动态代理.jdk;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 /**
- * <p>动态代理类 == 程序运行时，代理类才知道被代理的对象是哪个</p>
+ * <p>jdk动态代理类 == 程序运行时，代理类才知道被代理的对象是哪个</p>
  *
  * @author Appleyk
  * @version v0.1.1
  * @blob https://blog.csdn.net/appleyk
  * @date Created on 2018年11月10日 - 下午7:08:16
  */
-public class DynamicProxy implements InvocationHandler {
+public class JdkDynamicProxy implements InvocationHandler {
 
     /**
      * 被代理的目标对象
@@ -21,8 +21,9 @@ public class DynamicProxy implements InvocationHandler {
     /**
      * 暂时不知道被代理的对象是人还是动物或是其它...etc
      */
-    public DynamicProxy(Object object) {
-        this.targetObj = object;
+
+    public JdkDynamicProxy(Object delegate) {
+        this.targetObj = delegate;
     }
 
     @Override

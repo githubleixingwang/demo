@@ -1,7 +1,7 @@
 package com.appleyk.DMA8_代理模式.DM8.SP静态代理;
 
-import com.appleyk.DMA8_代理模式.DM8.service.CommodityService;
-import com.appleyk.DMA8_代理模式.DM8.service.impl.UserImpl;
+import com.appleyk.DMA8_代理模式.DM8.DP动态代理.jdk.service.CommodityService;
+import com.appleyk.DMA8_代理模式.DM8.DP动态代理.jdk.service.impl.UserImpl;
 
 /**
  * <p>用户代理类 == 静态代理模式，被代理的对象在编译时就知道了</p>

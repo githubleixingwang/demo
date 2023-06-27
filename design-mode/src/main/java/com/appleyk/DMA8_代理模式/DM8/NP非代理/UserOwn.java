@@ -1,6 +1,6 @@
 package com.appleyk.DMA8_代理模式.DM8.NP非代理;
 
-import com.appleyk.DMA8_代理模式.DM8.service.CommodityService;
+import com.appleyk.DMA8_代理模式.DM8.DP动态代理.jdk.service.CommodityService;
 
 /**
  * <p>用户自己去超市取商品 </p>

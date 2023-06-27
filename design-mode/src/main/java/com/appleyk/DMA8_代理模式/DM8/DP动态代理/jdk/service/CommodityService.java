@@ -1,4 +1,4 @@
-package com.appleyk.DMA8_代理模式.DM8.service;
+package com.appleyk.DMA8_代理模式.DM8.DP动态代理.jdk.service;
 
 /**
  * <p>商品接口</p>

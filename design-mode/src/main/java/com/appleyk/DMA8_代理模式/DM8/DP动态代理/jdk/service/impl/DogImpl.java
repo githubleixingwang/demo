@@ -1,6 +1,6 @@
-package com.appleyk.DMA8_代理模式.DM8.service.impl;
+package com.appleyk.DMA8_代理模式.DM8.DP动态代理.jdk.service.impl;
 
-import com.appleyk.DMA8_代理模式.DM8.service.CommodityService;
+import com.appleyk.DMA8_代理模式.DM8.DP动态代理.jdk.service.CommodityService;
 
 /**
  * <p>宠物狗实现商品接口 == 获取狗粮</p>
