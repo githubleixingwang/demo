@@ -1,7 +1,8 @@
 package com.appleyk.DMB15_观察者模式.DM15.Spring事件机制解耦业务.service;
 
 import com.appleyk.DMB15_观察者模式.DM15.Spring事件机制解耦业务.dao.UserDao;
-import com.appleyk.DMB15_观察者模式.DM15.Spring事件机制解耦业务.model.TSendEmailEvent;
+import com.appleyk.DMB15_观察者模式.DM15.Spring事件机制解耦业务.event.DeleteUserEvent;
+import com.appleyk.DMB15_观察者模式.DM15.Spring事件机制解耦业务.event.SaveUserEvent;
 import com.appleyk.DMB15_观察者模式.DM15.Spring事件机制解耦业务.model.TUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,12 +47,15 @@ public class UserService implements ApplicationContextAware {
 //            }
 //        });
 //    }
+        System.out.println("新增用户");
 
         // 注册完，发布事件（只需调用一次，就将可能比较耗时、比较复杂的发送邮件的业务与当前的service进行了解耦）
-        context.publishEvent(new TSendEmailEvent(this, user.getEmail(),"恭喜你成功注册XXX系统会员，更多内容请登录官网进行查看"));
-        long end = System.currentTimeMillis();
-        System.out.printf("用户<%s>完成注册,uid = %d，耗时：%dms\n", user.getUserName(),
-                user.getUid(), (end - start));
+        context.publishEvent(new SaveUserEvent(this, user.getUserName(),user.getEmail()));//在这发布了事件，由哪个监听执行，取决于发布的事件、监听的事件一致
+    }
+    public void deleteUser(TUser user) throws Exception {
+        System.out.println("删除用户");
+        // 注册完，发布事件（只需调用一次，就将可能比较耗时、比较复杂的发送邮件的业务与当前的service进行了解耦）
+        context.publishEvent(new DeleteUserEvent(this, user.getUserName(),user.getEmail()));
     }
 
     @Override

@@ -2,12 +2,6 @@ package com.appleyk.DMB15_观察者模式.DM15.Spring事件监听.event;
 
 import org.springframework.context.ApplicationEvent;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-
 /**
  * <p>定义一个测试事件，继承Spring封装的ApplicationEvent类</p>
  *
@@ -30,13 +24,6 @@ public class TestEvent extends ApplicationEvent {
 
     public String getName() {
         return name;
-    }
-
-    // 打印当前触发事件的时间
-    public void printDate(){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss");
-        LocalDateTime localDate = LocalDateTime.now();
-        System.out.println("系统当前时间："+localDate.format(dtf));
     }
 
 }

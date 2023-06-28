@@ -18,6 +18,7 @@ public class TestEmailEvent {
                 .email("123456@qq.com")
                 .build();
         userService.register(user);
+        userService.deleteUser(user);
         Thread.sleep(5000);
         context.close();
     }

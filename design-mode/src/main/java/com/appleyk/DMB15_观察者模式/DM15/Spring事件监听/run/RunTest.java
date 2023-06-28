@@ -20,6 +20,10 @@ public class RunTest {
         ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(SConfig.class);
         // 添加监听
         context.addApplicationListener(new TestEventListener1());
+        //处理业务
+        //...
+        System.out.println("做了业务操作" +
+                "");
         // 发布事件
         context.publishEvent(new TestEvent(new Object(),"测试事件"));
     }
