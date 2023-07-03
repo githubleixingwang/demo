@@ -1,4 +1,4 @@
-package com.demo.test.logaop.aspect;
+package com.demo.test.aop.logaop.aspect;
 
 import org.springframework.stereotype.Component;
 

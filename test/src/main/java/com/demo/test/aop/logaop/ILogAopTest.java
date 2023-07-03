@@ -1,6 +1,6 @@
-package com.demo.test.logaop;
+package com.demo.test.aop.logaop;
 
-import com.demo.test.logaop.annotation.LogEye;
+import com.demo.test.aop.logaop.annotation.LogEye;
 
 public interface ILogAopTest {
     @LogEye(desc = "aaaaaaaa")

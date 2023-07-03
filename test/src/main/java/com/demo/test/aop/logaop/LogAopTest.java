@@ -1,7 +1,7 @@
-package com.demo.test.logaop;
+package com.demo.test.aop.logaop;
 
-import com.demo.test.logaop.annotation.LogEye;
-import com.demo.test.logaop.aspect.AA;
+import com.demo.test.aop.logaop.annotation.LogEye;
+import com.demo.test.aop.logaop.aspect.AA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

@@ -8,15 +8,15 @@ package com.appleyk.DMA7_装饰器模式.DM7;
  * @blob https://blog.csdn.net/appleyk
  * @date Created on 2018年11月10日 - 下午4:12:43
  */
-public interface IFolder {
+public abstract class IFolder {
 
     /**
      * 创建文件夹
      */
-    void mkDir();
+    public abstract String mkDir();
 
     /**
      * 删除文件夹
      */
-    void rmdir();
+    public abstract void rmdir();
 }

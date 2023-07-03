@@ -1,5 +1,6 @@
 package com.demo.test.logaop;
 
+import com.demo.test.aop.logaop.LogAopTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

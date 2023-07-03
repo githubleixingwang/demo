@@ -1,4 +1,4 @@
-package com.demo.test.logaop.annotation;
+package com.demo.test.aop.logaop.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

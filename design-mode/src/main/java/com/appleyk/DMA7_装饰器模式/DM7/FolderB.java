@@ -8,11 +8,12 @@ package com.appleyk.DMA7_装饰器模式.DM7;
  * @blob https://blog.csdn.net/appleyk
  * @date Created on 2018年11月10日 - 下午4:15:39
  */
-public class FolderB implements IFolder {
+public class FolderB extends IFolder {
 
     @Override
-    public void mkDir() {
-        System.out.println("在Linux系统中创建文件夹B");
+    public String mkDir() {
+        return "Linux系统创建文件夹";
+
     }
 
     @Override

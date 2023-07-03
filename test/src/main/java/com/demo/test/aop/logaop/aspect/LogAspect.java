@@ -1,6 +1,6 @@
-package com.demo.test.logaop.aspect;
+package com.demo.test.aop.logaop.aspect;
 
-import com.demo.test.logaop.annotation.LogEye;
+import com.demo.test.aop.logaop.annotation.LogEye;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -27,7 +27,7 @@ public class LogAspect {
     /**
      * 配置切入点
      */
-    @Pointcut("@annotation(com.demo.test.logaop.annotation.LogEye)")
+    @Pointcut("@annotation(com.demo.test.aop.logaop.annotation.LogEye)")
     public void logPointcut() {
         // 该方法无方法体,主要为了让同类中其他方法使用此切入点
     }
