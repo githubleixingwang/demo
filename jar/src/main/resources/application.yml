@@ -1,0 +1,29 @@
+server:
+  port: 8670
+  #自定义访问路径，spring2.0格式
+#  servlet:
+#    context-path: /
+
+spring:
+  application:
+    name: jar
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+
+  autoconfigure:
+    exclude:
+  aop:
+    proxy-target-class: false
+
+
+eureka:
+  client:
+    #连接信息
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@127.0.0.1:18280/eureka/
+    enabled: false
+

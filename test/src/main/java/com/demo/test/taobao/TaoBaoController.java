@@ -1,7 +1,10 @@
 package com.demo.test.taobao;
 
 import com.demo.test.util.scheduled.ScheduleUtil;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,17 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 
 @RestController
 public class TaoBaoController {
 
     private static int num = 0;
+    private static boolean end = false;
     private static WebDriver browser = null;
 
     @Resource
@@ -117,7 +119,7 @@ public class TaoBaoController {
             String url = "https://webui.mybti.cn/#/selecttime?lineName=昌平线&stationName=沙河站";
             LocalTime time = LocalTime.now().withHour(12);
             LocalTime localTime = LocalTime.now();
-            int hour = localTime.getHour();
+
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Date());
             if (localTime.isBefore(time)) {
@@ -129,7 +131,7 @@ public class TaoBaoController {
             calendar.set(Calendar.SECOND, 0);
             calendar.set(Calendar.MILLISECOND, 0);
             Date date = calendar.getTime();
-
+            //计算周几
             LocalDate today = LocalDate.now();
             int day = today.plusDays(1).getDayOfWeek().getValue();
             String targetTime = "";
@@ -158,37 +160,51 @@ public class TaoBaoController {
                 long l1 = System.currentTimeMillis();
                 long l2 = date.getTime();
                 if (l2 - l1 <= 60000) {
-                    while (true) {
-                        //当前时间
-                        Date now = new Date();
-                        if (now.after(date) && now.getTime() - date.getTime() < 10000) {
-                            if (hour == 12) {
-                                Thread.sleep(100);
-                                for (int i = 0; i < 5; i++) {
+                    if (!end) {
+                        while (true) {
+                            //当前时间
+                            Date now = new Date();
+                            if (now.getTime() >= date.getTime()) {
+                                WebDriverWait wait3 = new WebDriverWait(browser, 100);
+                                for (int i = 0; i < 10; i++) {
                                     browser.get(url);
-                                }
-                            } else {
-                                Thread.sleep(50);
-                                for (int i = 0; i < 3; i++) {
-                                    browser.get(url);
+                                    WebElement element3 = wait3.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'" + targetTime + "')]/parent::div/parent::div/div[2]/div[7]/div[2]")));
+                                    ((JavascriptExecutor) browser).executeScript("arguments[0].click();", element3);
+                                    boolean bool = isJudgingElement(browser, By.xpath("//button[contains(text(),\"确定\")]"));
+                                    if (bool) {
+                                        WebDriverWait wait2 = new WebDriverWait(browser, 10);
+                                        WebElement element2 = wait2.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),\"确定\")]")));
+                                        ((JavascriptExecutor) browser).executeScript("arguments[0].click();", element2);
+                                        //scheduleUtil.cancelScheduledTask("ditie");
+                                        end = true;
+                                        break;
+                                    }
                                 }
                             }
-
-                            WebDriverWait wait = new WebDriverWait(browser, 2);
-                            WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'" + targetTime + "')]/parent::div/parent::div/div[2]/div[7]/div[2]")));
-                            ((JavascriptExecutor) browser).executeScript("arguments[0].click();", element);
-                            WebDriverWait wait2 = new WebDriverWait(browser, 5);
-                            WebElement element2 = wait2.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[contains(text(),\"确定\")]")));
-                            ((JavascriptExecutor) browser).executeScript("arguments[0].click();", element2);
-                            //scheduleUtil.cancelScheduledTask("ditie");
-                            break;
+                            if (end) {
+                                break;
+                            }
                         }
                     }
+
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            browser.quit();
+            //browser.quit();
+        }
+    }
+
+    /**
+     * 判断某个元素是否存在
+     */
+    public boolean isJudgingElement(WebDriver webDriver, By by) {
+        try {
+            webDriver.findElement(by);
+            return true;
+        } catch (Exception e) {
+            System.out.println("不存在此元素");
+            return false;
         }
     }
 

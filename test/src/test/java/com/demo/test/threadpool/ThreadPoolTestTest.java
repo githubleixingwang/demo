@@ -17,9 +17,11 @@ public class ThreadPoolTestTest {
     public void test1() {
         threadPoolTest.test();
     }
- @Test
+
+    @Test
     public void test2() {
         threadPoolTest.test2();
     }
+
 
 }
