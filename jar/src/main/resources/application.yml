@@ -27,3 +27,4 @@ eureka:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@127.0.0.1:18280/eureka/
     enabled: false
 
+

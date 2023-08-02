@@ -1,5 +1,6 @@
-package com.demo.jar;
+package com.demo.jar.controller;
 
+import com.demo.jar.TestService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,7 +39,7 @@ public class TestController {
                 System.out.println("先输出代表异步执行");
             }
         }
-        threadPoolExecutor.shutdown();
+        //threadPoolExecutor.shutdown();
     }
 
     @RequestMapping("/testb")
@@ -47,4 +48,12 @@ public class TestController {
             testService.b(i);
         }
     }
+
+    @RequestMapping("/testc")
+    public void testC() {
+        while (true){
+
+        }
+    }
+
 }

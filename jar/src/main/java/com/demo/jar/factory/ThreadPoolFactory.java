@@ -61,4 +61,22 @@ public class ThreadPoolFactory {
                 new ThreadPoolExecutor.AbortPolicy());//拒绝策略； 默认是抛异常
         return threadPoolTaskExecutor;
     }
+
+    /**
+     * 队列不缓存线程
+     *
+     * @return
+     */
+    @Bean(name = "threadPoolExecutorTicket")
+    public ThreadPoolExecutor threadPoolExecutorTicket() {
+        ThreadPoolExecutor threadPoolTaskExecutor = new ThreadPoolExecutor(
+                1,
+                10,
+                10,
+                TimeUnit.SECONDS,
+                new SynchronousQueue<>(),
+                new ThreadFactoryBuilder().setNameFormat("general-ticket-batch-%d").build(),
+                new ThreadPoolExecutor.AbortPolicy());//拒绝策略； 默认是抛异常
+        return threadPoolTaskExecutor;
+    }
 }

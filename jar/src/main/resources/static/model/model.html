@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>moudle</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="..//css/bootstrap-table.css">
+    <link rel="stylesheet" href="..//css/layui.css">
+</head>
+<body>
+<div style="width: 50%">
+
+    <div class="container" id="queryDiv">
+
+        <div style="text-align:center; margin-top: 10px;margin-bottom: 10px">
+            <label>剩余线程数：</label><span id="num"></span>
+        </div>
+
+    </div>
+    <div class="d-grid gap-2 col-6 mx-auto" style="margin-top: 30px">
+        <button class="btn btn-primary" type="button" onclick="start()">开始</button>
+    </div>
+</div>
+
+<script type="text/javascript" src="../js/jquery-1.11.2.min.js"/>
+<script type="text/javascript" src="../js/bootstrap.js"></script>
+<script type="text/javascript" src="../js/checkUtil.js"></script>
+<script type="text/javascript">
+    $(function () {
+        for (var i = 1; i < 11; i++) {
+            $('#queryDiv').append($(
+                '<div class="row row-cols-auto">\n' +
+                ' <div class="col-4">\n' +
+                ' <label>手机号：</label>\n' +
+                ' <input id="dtp' + i + '" name="dtp' + i + '"' + '/>\n' +
+                ' </div>\n' +
+                ' <div class="col-4">' +
+                ' <label>站点：</label>\n' +
+                ' <select id="dts' + i + '" name="dts' + i + '"' + '>\n' +
+                ' <option value="" selected></option>\n' +
+                ' <option value="one">昌平线-沙河站</option>\n' +
+                ' <option value="two">5号线-天通苑站</option>\n' +
+                ' <option value="three">6号线-草房站</option>\n' +
+                ' </select>\n' +
+                ' </div>\n' +
+                ' <div class="col-4">' +
+                ' <label>时间段：</label>\n' +
+                ' <select id="dtt' + i + '" name="dtt' + i + '"' + '>\n' +
+                ' <option value="" selected></option>\n' +
+                ' <option value="1">6:30-6:40</option>\n' +
+                ' <option value="2">6:40-6:50</option>\n' +
+                ' <option value="3">6:50-7:00</option>\n' +
+                ' <option value="4">7:00-7:10</option>\n' +
+                ' <option value="5">7:10-7:20</option>\n' +
+                ' <option value="6">7:20-7:30</option>\n' +
+                ' <option value="7">7:30-7:40</option>\n' +
+                ' <option value="8">7:40-7:50</option>\n' +
+                ' <option value="9">7:50-8:00</option>\n' +
+                ' <option value="10">8:00-8:10</option>\n' +
+                ' <option value="11">8:10-8:20</option>\n' +
+                ' <option value="12">8:20-8:30</option>\n' +
+                ' <option value="13">8:30-8:40</option>\n' +
+                ' <option value="14">8:40-8:50</option>\n' +
+                ' <option value="15">8:50-9:00</option>\n' +
+                ' <option value="16">9:00-9:10</option>\n' +
+                ' <option value="17">9:10-9:20</option>\n' +
+                ' <option value="18">9:20-9:30</option>\n' +
+                ' </select>\n' +
+                ' </div>\n' +
+                ' </div>\n' +
+                ' </div>'));
+        }
+
+        $.ajax({
+            url: "/ticket/getCount",
+            async: false,
+            type: "GET",
+            success: function (data) {
+                $("#num").text(data.count);
+            }, error: function (errorMsg) {
+            }
+        });
+
+    });
+
+    function start() {
+        var num = $("#num").text();
+        if (num > 0) {
+            var arr = new Array();
+            for (var i = 1; i < 11; i++) {
+                var obj = {};
+                obj.phone = $("#dtp" + i).val();
+                obj.subway = $("#dts" + i + "  option:selected").text();
+                obj.num = $("#dtt" + i).val();
+                arr.push(obj);
+            }
+            $.ajax({
+                url: "/ticket/ditie",
+                async: false,
+                type: "POST",
+                data: JSON.stringify(arr),
+                dataType: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    $("#num").text(data.count);
+                }, error: function (errorMsg) {
+                }
+            });
+        } else {
+            alert("线程数已用完");
+        }
+
+    }
+
+</script>
+</body>
+</html>

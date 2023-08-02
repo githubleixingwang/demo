@@ -1,4 +1,4 @@
-package com.demo.jar;
+package com.demo.jar.service;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
