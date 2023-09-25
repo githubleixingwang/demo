@@ -55,7 +55,7 @@ public class TicketDiTieService {
                 targetTime = DayEnum.getVal(day);
             }
             //配置浏览器驱动位置（驱动.exe与浏览器.exe在同级目录）
-            System.setProperty("webdriver.chrome.driver", "D:\\googledriver\\114.0.5735.90\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "D:\\googledriver\\117\\chromedriver-win64\\chromedriver.exe");
             ChromeOptions options = new ChromeOptions();
             options.addArguments("start-maximized"); // open Browser in maximized mode
             options.addArguments("disable-infobars"); // disabling infobars

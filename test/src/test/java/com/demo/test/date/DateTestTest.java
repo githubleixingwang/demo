@@ -21,8 +21,9 @@ class DateTestTest {
 
     @Test
     void getTimeTest() {
-        Map time = new DateTest().getTime("23_06", DateTest.YY_MM2);
+        Map time = new DateTest().getTime("23_09", DateTest.YY_MM2);
         System.out.println(time);
+
     }
 
     @Test
@@ -35,5 +36,10 @@ class DateTestTest {
             }
         }
         objects.forEach(System.out::println);
+    }
+
+    @Test
+    void getBetweenDay(){
+        System.out.println(new DateTest().betweenDay(1695571200000L, 1695657600000L));
     }
 }

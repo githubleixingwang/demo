@@ -78,16 +78,31 @@ public class DateTest {
         return list;
     }
 
-    public static Map<String,Long> getTime(String date, String format) {
-        Map<String,Long> map = Maps.newHashMap();
+    public static Map<String,Object> getTime(String date, String format) {
+        Map<String,Object> map = Maps.newHashMap();
         YearMonth yearMonth = YearMonth.parse(date, DateTimeFormatter.ofPattern(format));
         LocalDate dateTime = yearMonth.atEndOfMonth();
         LocalDate min = dateTime.with(TemporalAdjusters.firstDayOfMonth());
-        LocalDate max = dateTime.with(TemporalAdjusters.firstDayOfNextMonth());
+        LocalDate max = dateTime.with(TemporalAdjusters.lastDayOfMonth());
+        map.put("start",min);
+        map.put("end",max);
         long start = min.atStartOfDay(ZoneOffset.ofHours(8)).toInstant().toEpochMilli();
         long end = max.atStartOfDay(ZoneOffset.ofHours(8)).toInstant().toEpochMilli();
-        map.put("start",start);
-        map.put("end",end);
+        map.put("startLong",start);
+        map.put("endLong",end);
         return map;
+    }
+
+    /**
+     * 两个时间相差的天数
+     * @param start
+     * @param end
+     * @return
+     */
+    public static Integer betweenDay(Long start,Long end){
+        LocalDateTime startLocalDate = Instant.ofEpochMilli(start).atZone(ZoneOffset.ofHours(8)).toLocalDateTime();
+        LocalDateTime endLocalDate = Instant.ofEpochMilli(end).atZone(ZoneOffset.ofHours(8)).toLocalDateTime();
+        int days = (int)Duration.between(startLocalDate,endLocalDate).toDays();
+        return days;
     }
 }
