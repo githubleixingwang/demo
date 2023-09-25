@@ -2,6 +2,9 @@ package com.demo.jar.controller;
 
 import com.demo.jar.service.TicketDiTieService;
 import com.demo.jar.vo.DitieVo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,6 +63,25 @@ public class TicketController {
     public Map<String, Object> getCount() {
         Map<String, Object> map = new HashMap<>();
         map.put("count", count);
+        B b = new B();
+        b.setSte("a");
+        A a = new A();
+        a.setB(b);
+        b.setSte("aa");
+        b.setSte2("aa");
         return map;
+    }
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    class A{
+        private B b;
+    }
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    class B{
+        private String ste;
+        private String ste2;
     }
 }

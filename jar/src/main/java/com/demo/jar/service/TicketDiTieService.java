@@ -90,8 +90,8 @@ public class TicketDiTieService {
                 }
                 //当前时间
                 if (currentTimeMillis >= date.getTime()) {
-                    WebDriverWait wait = new WebDriverWait(browser, 100);
-                    for (int i = 0; i < 10; i++) {
+                    WebDriverWait wait = new WebDriverWait(browser, 10);
+                    for (int i = 0; i < 100; i++) {
                         browser.get(url);
                         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[contains(text(),'" + targetTime + "')]/parent::div/parent::div/div[2]/div[" + num + "]/div[2]")));
                         ((JavascriptExecutor) browser).executeScript("arguments[0].click();", element);
