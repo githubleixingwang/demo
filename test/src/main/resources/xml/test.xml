@@ -9,13 +9,44 @@
         <array item="a"/>
         <array item="b"/>
         <array item="c"/>
+        <ParamMap>
+            <Item key="key1" des="des1" value="value1"></Item>
+            <Item key="key2" des="des2" value="value2"></Item>
+        </ParamMap>>
     </Parameters>
 
     <Shared>
         <Res aaa="aaa">
+            <bbb>bbb</bbb>
             <ShellCommand>
                 <Command>vmstat 1 2</Command>
             </ShellCommand>
         </Res>
     </Shared>
+
+    <Layer name="a">
+        <Layer name="a1">
+            <Layer name="a1b1">
+                <Node str="a"></Node>
+                <Node str="b"></Node>
+                <Node str="c"></Node>
+            </Layer>
+            <Layer name="a1b2">
+                <Node str="d"></Node>
+            </Layer>
+            <Layer name="a1b3">
+                <Node str="e"></Node>
+            </Layer>
+        </Layer>
+        <Layer name="a2">
+            <Layer name="a2b1">
+                <Node str="f"></Node>
+            </Layer>
+        </Layer>
+        <Layer name="a3">
+            <Layer name="a3b1">
+                <Node str="g"></Node>
+            </Layer>
+        </Layer>
+    </Layer>
 </DigesterObj>

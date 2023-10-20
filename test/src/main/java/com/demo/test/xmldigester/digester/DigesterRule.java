@@ -28,16 +28,29 @@ public class DigesterRule {
         digester.addCallParam("DigesterObj/Parameters/Param", 1, "value");
         digester.addCallMethod("DigesterObj/Parameters/array", "addList", 1);
         digester.addCallParam("DigesterObj/Parameters/array", 0, "item");
+        digester.addObjectCreate("DigesterObj/Parameters/ParamMap", ParamMap.class);
+        digester.addObjectCreate("DigesterObj/Parameters/ParamMap/Item", ParamMapItem.class);
+        digester.addSetProperties("DigesterObj/Parameters/ParamMap/Item");
+        digester.addSetNext("DigesterObj/Parameters/ParamMap/Item", "addMap");//当匹配到模式，调用栈顶元素的上一个元素的methodName方法并以栈顶元素作为参数（反射）,弹出栈顶的对象
+        digester.addSetNext("DigesterObj/Parameters/ParamMap", "setParamMap");//当匹配到模式，调用栈顶元素的上一个元素的methodName方法并以栈顶元素作为参数（反射）,弹出栈顶的对象
         digester.addSetNext("DigesterObj/Parameters", "setParameters");//当匹配到模式，调用栈顶元素的上一个元素的methodName方法并以栈顶元素作为参数（反射）,弹出栈顶的对象
 
         digester.addObjectCreate("DigesterObj/Shared", Shared.class);
         digester.addObjectCreate("DigesterObj/Shared/Res", Res.class);
         digester.addSetProperties("DigesterObj/Shared/Res");//匹配到Res节点时，会将Res节点中的属性设置到Res对象中，示例中设置的是aaa
+//        digester.addBeanPropertySetter("DigesterObj/Shared/Res/bbb","bbb");
         digester.addObjectCreate("DigesterObj/Shared/Res/ShellCommand", ShellCommand.class);
         digester.addBeanPropertySetter("DigesterObj/Shared/Res/ShellCommand/Command", "command");
         digester.addSetNext("DigesterObj/Shared/Res/ShellCommand", "setShellCommand");
         digester.addSetNext("DigesterObj/Shared/Res", "setRes");
         digester.addSetNext("DigesterObj/Shared", "setShared");
+
+        digester.addObjectCreate("*/Layer", Layer.class);
+        digester.addSetProperties("*/Layer");
+        digester.addObjectCreate("*/Layer/Node", Node.class);
+        digester.addSetProperties("*/Layer/Node");
+        digester.addSetNext("*/Layer/Node", "addNodeList");
+        digester.addSetNext("*/Layer", "addLayerList",Layer.class.getName());
 
         InputStream resource = ClassLoader.getSystemClassLoader().getResourceAsStream("xml/test.xml");
         DigesterObj parse = (DigesterObj) digester.parse(resource);

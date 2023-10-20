@@ -17,6 +17,7 @@ public class Parameters implements Serializable {
 
     private Map<String,String> param = new HashMap<>();
 
+    private ParamMap paramMap;
     public String getVersion() {
         return version;
     }
@@ -62,6 +63,14 @@ public class Parameters implements Serializable {
         this.list.add(item);
     }
 
+    public ParamMap getParamMap() {
+        return paramMap;
+    }
+
+    public void setParamMap(ParamMap paramMap) {
+        this.paramMap = paramMap;
+    }
+
     @Override
     public String toString() {
         return "Parameters{" +
@@ -69,6 +78,7 @@ public class Parameters implements Serializable {
                 ", sortPriority='" + sortPriority + '\'' +
                 ", list=" + list +
                 ", param=" + param +
+                ", paramMap=" + paramMap +
                 '}';
     }
 }

@@ -7,6 +7,11 @@ import java.io.Serializable;
  * @date: 2023-06-14  10:45
  */
 public class Res implements Serializable {
+
+    private String aaa;
+    private String bbb;
+    private ShellCommand shellCommand;
+
     public String getAaa() {
         return aaa;
     }
@@ -14,10 +19,13 @@ public class Res implements Serializable {
     public void setAaa(String aaa) {
         this.aaa = aaa;
     }
+    public String getBbb() {
+        return bbb;
+    }
 
-    private String aaa;
-    private ShellCommand shellCommand;
-
+    public void setBbb(String bbb) {
+        this.bbb = bbb;
+    }
     public ShellCommand getShellCommand() {
         return shellCommand;
     }
@@ -30,7 +38,8 @@ public class Res implements Serializable {
     @Override
     public String toString() {
         return "Res{" +
-                "aaa=" + aaa +
+                "aaa='" + aaa + '\'' +
+                ", bbb='" + bbb + '\'' +
                 ", shellCommand=" + shellCommand +
                 '}';
     }
