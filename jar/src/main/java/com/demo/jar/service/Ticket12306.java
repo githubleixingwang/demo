@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -21,12 +22,12 @@ public class Ticket12306 {
     private static boolean flag = true;
     private static boolean end = false;
 
-    //@Scheduled(cron = "0 */1 * * * ?")
+   // @Scheduled(cron = "0 */1 * * * ?")
     public void ticket() {
         try {
             if (flag) {
                 //配置浏览器驱动位置（驱动.exe与浏览器.exe在同级目录）
-                System.setProperty("webdriver.chrome.driver", "D:\\googledriver\\114.0.5735.90\\chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "D:\\chrome\\ChromeCore\\chromedriver.exe");
                 ChromeOptions options = new ChromeOptions();
                 options.addArguments("start-maximized"); // open Browser in maximized mode
                 options.addArguments("disable-infobars"); // disabling infobars
@@ -34,7 +35,7 @@ public class Ticket12306 {
                 options.addArguments("--disable-gpu"); // applicable to windows os only
                 options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
                 options.addArguments("--no-sandbox"); // Bypass OS security model
-                options.setBinary("C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe");
+                options.setBinary("D:\\chrome\\ChromeCore\\ChromeCore.exe");
                 browser = new ChromeDriver(options);
                 //2、输入网址
                 browser.get("https://kyfw.12306.cn/otn/resources/login.html");
@@ -64,19 +65,19 @@ public class Ticket12306 {
                 ((JavascriptExecutor) browser).executeScript(click, elementFrom);
 
                 browser.findElement(By.name("leftTicketDTO.to_station_name")).click();
-                browser.findElement(By.name("leftTicketDTO.to_station_name")).sendKeys("定州东");
-                WebElement elementTo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='ralign'  and text()='定州东']")));
+                browser.findElement(By.name("leftTicketDTO.to_station_name")).sendKeys("正定机场");
+                WebElement elementTo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='ralign'  and text()='正定机场']")));
                 ((JavascriptExecutor) browser).executeScript(click, elementTo);
 
-                browser.findElement(By.id("train_date")).sendKeys("2023-08-01");
+                browser.findElement(By.id("train_date")).sendKeys("2024-02-08");
                 browser.findElement(By.id("query_ticket")).click();
 
                 //预订的xpath
-                String yudingXpath = "//a[contains(text(),'K7725')]/parent::div/parent::div/parent::div/parent::td/parent::tr/td[13]/a[contains(text(),'预订')]";
+                String yudingXpath = "//a[contains(text(),'G7813')]/parent::div/parent::div/parent::div/parent::td/parent::tr/td[13]/a[contains(text(),'预订')]";
                 //乘车人
-                String user = "//label[contains(text(),'雷兴旺')  ]/preceding-sibling::input[@allencstr]";
+                String user = "//label[contains(text(),'贾玲玲')  ]/preceding-sibling::input[@allencstr]";
                 //席别
-                String zuo = "//option[contains(text(),'硬座')]";
+                String zuo = "//option[contains(text(),'二等')]";
                 //确认订单
                 String check = "//div[contains(text(),'请核对以下信息')]";
                 //提交叮订单

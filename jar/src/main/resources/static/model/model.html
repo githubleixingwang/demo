@@ -7,21 +7,81 @@
     <link rel="stylesheet" href="..//css/bootstrap-table.css">
     <link rel="stylesheet" href="..//css/layui.css">
 </head>
+<style>
+
+    .border {
+        display: flex; /* 设置容器为flex布局 */
+    }
+
+    /* 若要水平居中对齐，则添加下面这行代码 */
+    .border {
+        justify-content: center;
+    }
+
+
+</style>
+
 <body>
-<div style="width: 50%">
+<div style="text-align:center; margin-top: 10px;margin-bottom: 10px">
+    <label>剩余线程数：</label><span id="num"></span>
+</div>
+<div class="border">
+    <div style="width: 50%">
+        <div class="container" id="queryDiv">
 
-    <div class="container" id="queryDiv">
-
-        <div style="text-align:center; margin-top: 10px;margin-bottom: 10px">
-            <label>剩余线程数：</label><span id="num"></span>
         </div>
-
+        <div class="d-grid gap-2 col-6 mx-auto" style="margin-top: 30px">
+            <button class="btn btn-primary" type="button" onclick="start()">地铁预约开始</button>
+        </div>
     </div>
-    <div class="d-grid gap-2 col-6 mx-auto" style="margin-top: 30px">
-        <button class="btn btn-primary" type="button" onclick="start()">开始</button>
+
+
+    <div style="width: 50%">
+        <form id="ticket12306" >
+            <div class="row row-cols-auto">
+                <div class="col-4">
+                    <label>账号：</label>
+                    <input id="phone" name="phone"/>
+                </div>
+                <div class="col-4">
+                    <label>密码：</label>
+                    <input id="psw" name="psw"/>
+                </div>
+                <div class="col-4">
+                    <label>身份证后四位：</label>
+                    <input id="idCard" name="idCard"/>
+                </div>
+                <div class="col-4">
+                    <label>出发地：</label>
+                    <input id="start" name="start"/>
+                </div>
+                <div class="col-4">
+                    <label>目的地：</label>
+                    <input id="end" name="end"/>
+                </div>
+                <div class="col-4">
+                    <label>时间：</label>
+                    <input id="travelTtime" name="travelTtime"/>
+                </div>
+                <div class="col-4">
+                    <label>车次：</label>
+                    <input id="trainNumber" name="trainNumber"/>
+                </div>
+                <div class="col-4">
+                    <label>乘车人：</label>
+                    <input id="passenger" name="passenger"/>
+                </div>
+                <div class="col-4">
+                    <label>坐席：</label>
+                    <input id="seats" name="seats"/>
+                </div>
+            </div>
+        </form>
+        <div class="d-grid gap-2 col-6 mx-auto" style="margin-top: 30px">
+            <button class="btn btn-primary" type="button" onclick="start12306()">12306预约开始</button>
+        </div>
     </div>
 </div>
-
 <script type="text/javascript" src="../js/jquery-1.11.2.min.js"/>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/checkUtil.js"></script>
@@ -71,6 +131,7 @@
                 ' </div>'));
         }
 
+
         $.ajax({
             url: "/ticket/getCount",
             async: false,
@@ -101,6 +162,28 @@
                 data: JSON.stringify(arr),
                 dataType: "json",
                 contentType: "application/json",
+                success: function (data) {
+                    $("#num").text(data.count);
+                }, error: function (errorMsg) {
+                }
+            });
+        } else {
+            alert("线程数已用完");
+        }
+
+    }
+
+    function start12306() {
+        var num = $("#num").text();
+        if (num > 0) {
+            $.ajax({
+                url: "/ticket/ticket12306",
+               // async: false,
+                type: "POST",
+                data: $("#ticket12306").serialize(),
+                //processData:false,
+                //dataType: "json",//返回类型
+                // contentType: "application/json",//请求类型
                 success: function (data) {
                     $("#num").text(data.count);
                 }, error: function (errorMsg) {
