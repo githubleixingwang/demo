@@ -16,9 +16,9 @@ public class test {
          long time = 1704246367000L;
          long begin = 1;//起始id
          long end = begin+100000;//每次循环插入的数据量
-         String url = "jdbc:mysql://localhost:3308/tsoc?useServerPrepStmts=false&rewriteBatchedStatements=true&useUnicode=true&amp;characterEncoding=UTF-8";
+         String url = "jdbc:mysql://localhost:3308/test?useServerPrepStmts=false&rewriteBatchedStatements=true&useUnicode=true&amp;characterEncoding=UTF-8";
          String user = "root";
-         String password = "venustech.tsoc.db.ROOT";
+         String password = "";
 
 
             //定义连接、statement对象
