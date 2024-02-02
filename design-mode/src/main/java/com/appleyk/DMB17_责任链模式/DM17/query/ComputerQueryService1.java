@@ -107,7 +107,6 @@ public class ComputerQueryService1 {
                 mouse.setId(idsMaker.nextId());
                 mouse.setName("罗技鼠标");
                 computer.setMouse(mouse);
-                System.out.println();
             }
         }
     }
