@@ -1,6 +1,7 @@
 package com.appleyk.DMB17_责任链模式.DM17;
 
 import com.appleyk.utils.IdsMaker;
+import lombok.Data;
 
 /**
  * <p>抽象任务链</p>
@@ -10,9 +11,14 @@ import com.appleyk.utils.IdsMaker;
  * @blob https://blog.csdn.net/appleyk
  * @date Created on 下午 1:56 2018-11-6
  */
+@Data
 public abstract class AbstractHandler<TData, TFilter> {
 
     protected IdsMaker idsMaker = new IdsMaker(1, 31);
+
+    public void setData(TData data) {
+        this.data = data;
+    }
 
     /**
      * 任务链传递的数据【消费数据And最终数据】
@@ -31,22 +37,6 @@ public abstract class AbstractHandler<TData, TFilter> {
      * @return TData
      */
     public abstract TData filter(TFilter filter);
-
-    public TData getData() {
-        return data;
-    }
-
-    public void setData(TData data) {
-        this.data = data;
-    }
-
-    public AbstractHandler<TData, TFilter> getNextHandler() {
-        return nextHandler;
-    }
-
-    public void setNextHandler(AbstractHandler<TData, TFilter> nextHandler) {
-        this.nextHandler = nextHandler;
-    }
 
     public static <TFilter> Object process(AbstractHandler handler, TFilter filter) {
         AbstractHandler nextHandler = handler;

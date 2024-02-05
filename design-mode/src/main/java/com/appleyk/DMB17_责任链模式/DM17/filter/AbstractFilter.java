@@ -1,5 +1,7 @@
 package com.appleyk.DMB17_责任链模式.DM17.filter;
 
+import lombok.Data;
+
 import java.util.HashSet;
 
 /**
@@ -10,6 +12,8 @@ import java.util.HashSet;
  * @blob https://blog.csdn.net/appleyk
  * @date Created on 下午 2:11 2018-11-6
  */
+@Data
+//@NoArgsConstructor
 public abstract class AbstractFilter {
 
     /**
@@ -25,39 +29,8 @@ public abstract class AbstractFilter {
     private Integer pageNum = 1;
     private Integer pageSize = 10;
 
-    public HashSet<Long> getIds() {
-        return ids;
-    }
-
-    public void setIds(HashSet<Long> ids) {
-        this.ids = ids;
-    }
-
     public void addIds(Long id) {
         this.ids.add(id);
     }
 
-    public HashSet<String> getNames() {
-        return names;
-    }
-
-    public void setNames(HashSet<String> names) {
-        this.names = names;
-    }
-
-    public Integer getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(Integer pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public Integer getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
-    }
 }

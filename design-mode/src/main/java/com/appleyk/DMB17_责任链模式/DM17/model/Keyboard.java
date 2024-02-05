@@ -1,13 +1,18 @@
 package com.appleyk.DMB17_责任链模式.DM17.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 /**
- * <p>键盘</p>
+ * 键盘
  *
  * @author Appleyk
  * @version v0.1.1
  * @blob https://blog.csdn.net/appleyk
  * @date Created on 下午 2:02 2018-11-6
  */
+@Data
+@AllArgsConstructor
 public class Keyboard extends AbstractObject {
 
     /**
@@ -15,17 +20,6 @@ public class Keyboard extends AbstractObject {
      */
     private String type;
 
-    public Keyboard(String type) {
-        this.type = type;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     @Override
     public void show() {

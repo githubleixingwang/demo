@@ -1,5 +1,7 @@
 package com.appleyk.DMB17_责任链模式.DM17.filter;
 
+import lombok.Data;
+
 /**
  * <p></p>
  *
@@ -8,6 +10,7 @@ package com.appleyk.DMB17_责任链模式.DM17.filter;
  * @blob https://blog.csdn.net/appleyk
  * @date Created on 下午 2:11 2018-11-6
  */
+@Data
 public class ComputerFilter extends AbstractFilter {
 
     /**
@@ -25,31 +28,5 @@ public class ComputerFilter extends AbstractFilter {
      */
     private Boolean loadMouse = false;
 
-    public ComputerFilter() {
 
-    }
-
-    public Boolean getLoadMonitor() {
-        return loadMonitor;
-    }
-
-    public void setLoadMonitor(Boolean loadMonitor) {
-        this.loadMonitor = loadMonitor;
-    }
-
-    public Boolean getLoadKeyboard() {
-        return loadKeyboard;
-    }
-
-    public void setLoadKeyboard(Boolean loadKeyboard) {
-        this.loadKeyboard = loadKeyboard;
-    }
-
-    public Boolean getLoadMouse() {
-        return loadMouse;
-    }
-
-    public void setLoadMouse(Boolean loadMouse) {
-        this.loadMouse = loadMouse;
-    }
 }

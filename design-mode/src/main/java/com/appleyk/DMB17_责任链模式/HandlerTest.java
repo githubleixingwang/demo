@@ -28,7 +28,7 @@ public class HandlerTest {
         // 载入显示器信息
         filter.setLoadMonitor(true);
         // 载入鼠标信息
-        filter.setLoadMouse(true);
+        filter.setLoadMouse(false);
 
         // 不使用任务链模式进行查询
         noUseHandler(filter);
