@@ -83,8 +83,9 @@ public class Ticket12306Service {
 
         while (true) {
             try {
-                Thread.sleep(500);
+                //Thread.sleep(500);
                 driver.findElement(By.id("query_ticket")).click();
+                Thread.sleep(1000);
                 //根据车次去页面滑动查找元素
                 XpathUtils.scrollToElement(driver, ticketInfoXpath);
                 Thread.sleep(500);

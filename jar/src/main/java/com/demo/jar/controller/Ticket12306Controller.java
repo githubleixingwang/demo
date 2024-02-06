@@ -37,7 +37,7 @@ public class Ticket12306Controller {
     }
 
     @RequestMapping("/ticket12306")
-    public Map<String, Object> ticket12306(Ticket12306Vo vo) {
+    public Map<String, Object> ticket12306(Ticket12306Vo vo) throws Exception {
         Map<String, Object> map = new HashMap<>();
         if (StringUtils.isNotBlank(vo.getSeats()) && StringUtils.isNotBlank(vo.getPsw()) && StringUtils.isNotBlank(vo.getPassenger())) {
             ticket12306Service.ticket12306(vo);
