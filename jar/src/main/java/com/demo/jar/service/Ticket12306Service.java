@@ -10,8 +10,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.system.ApplicationHome;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import java.io.File;
 
 /**
  * @author: lxw
@@ -20,11 +26,32 @@ import org.springframework.stereotype.Service;
 @Service
 public class Ticket12306Service {
 
-    @Async("threadPoolExecutorTicket")
-    public void ticket12306(Ticket12306Vo vo) throws Exception{
+    @Autowired
+    private ResourceLoader resourceLoader;
 
-        //1.配置浏览器驱动位置（驱动.exe与浏览器.exe在同级目录）
-        System.setProperty("webdriver.chrome.driver", "D:\\chrome\\ChromeCore\\chromedriver.exe");
+    @Async("threadPoolExecutorTicket")
+    public void ticket12306(Ticket12306Vo vo) throws Exception {
+        long tokenTime = System.currentTimeMillis();
+
+        ApplicationHome home = new ApplicationHome(getClass());
+        File jarFile = home.getSource();
+        String classPath = jarFile.toString();
+        String chromeDriverFilePath;
+        //根据运行路径中是否包含.jar判断是jar包方式运行还是源码方式运行
+        if (classPath.contains(".jar")) {
+            //如果是打包，取exe文件的同级目录下去找浏览器驱动
+            ClassPathResource classPathResource = new ClassPathResource("static/chrome/Application/chromedriver.exe");
+            chromeDriverFilePath = classPathResource.getPath();
+        } else {
+            //如果是源码取编译路径下的浏览器驱动
+            chromeDriverFilePath = resourceLoader.getResource("classpath:static/chrome/Application/chromedriver.exe").getURL().getPath();
+            // chromeDriverFilePath = classPath + "/static/chrome/Application/chromedriver.exe";
+        }
+        if (chromeDriverFilePath.startsWith("file:")) {
+            chromeDriverFilePath = chromeDriverFilePath.replace("file:", "");
+        }
+        //配置浏览器驱动位置（驱动.exe与浏览器.exe在同级目录）
+        System.setProperty("webdriver.chrome.driver", chromeDriverFilePath);
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized"); // open Browser in maximized mode
         options.addArguments("disable-infobars"); // disabling infobars
@@ -32,7 +59,7 @@ public class Ticket12306Service {
         options.addArguments("--disable-gpu"); // applicable to windows os only
         options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
         options.addArguments("--no-sandbox"); // Bypass OS security model
-        options.setBinary("D:\\chrome\\ChromeCore\\ChromeCore.exe");
+        //options.setBinary(chromeFilePath);
         WebDriver driver = new ChromeDriver(options);
         //2、登录
         driver.get("https://kyfw.12306.cn/otn/resources/login.html");
@@ -83,6 +110,26 @@ public class Ticket12306Service {
 
         while (true) {
             try {
+                long currentTimeMillis = System.currentTimeMillis();
+                if (currentTimeMillis - tokenTime > 600000) {
+                    //防止会话失效
+                    tokenTime = currentTimeMillis;
+                    driver.get("https://kyfw.12306.cn/otn/leftTicket/init?linktypeid=dc");
+                    Thread.sleep(5000);
+                    driver.findElement(By.name("leftTicketDTO.from_station_name")).clear();
+                    driver.findElement(By.name("leftTicketDTO.to_station_name")).clear();
+                    driver.findElement(By.id("train_date")).clear();
+                    Thread.sleep(2000);
+                    driver.findElement(By.name("leftTicketDTO.from_station_name")).click();
+                    driver.findElement(By.name("leftTicketDTO.from_station_name")).sendKeys(vo.getStart());
+                    elementFrom = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='ralign'  and text()='" + vo.getStart() + "']")));
+                    ((JavascriptExecutor) driver).executeScript(click, elementFrom);
+                    driver.findElement(By.name("leftTicketDTO.to_station_name")).click();
+                    driver.findElement(By.name("leftTicketDTO.to_station_name")).sendKeys(vo.getEnd());
+                    elementTo = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[@class='ralign'  and text()='" + vo.getEnd() + "']")));
+                    ((JavascriptExecutor) driver).executeScript(click, elementTo);
+                    driver.findElement(By.id("train_date")).sendKeys(vo.getTravelTtime());
+                }
                 //Thread.sleep(500);
                 driver.findElement(By.id("query_ticket")).click();
                 Thread.sleep(1000);

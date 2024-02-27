@@ -13,10 +13,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -52,6 +49,8 @@ public class PipelineRouteConfig implements ApplicationContextAware {
     @Bean("pipelineRouteMap")
     public Map<Class<? extends PipelineContext>, List<? extends ContextHandler<? extends PipelineContext>>> getHandlerPipelineMap() {
         return PIPELINE_ROUTE_MAP.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, this::toPipeline));
+       /* Set<Map.Entry<Class<? extends PipelineContext>, List<Class<? extends ContextHandler<? extends PipelineContext>>>>> entries = PIPELINE_ROUTE_MAP.entrySet();
+        return entries.stream().collect(Collectors.toMap(Map.Entry::getKey,this::toPipeline));*/
     }
 
     /**

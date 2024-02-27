@@ -150,7 +150,6 @@
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
                     <include>**</include>
-
                 </includes>
                 <filtering>false</filtering>
             </resource>
@@ -168,19 +167,19 @@
                 </configuration>
 
             </plugin>
-            <plugin>
+       <!--     <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
-                    <!-- get all project dependencies -->
+                    &lt;!&ndash; get all project dependencies &ndash;&gt;
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <!-- MainClass in mainfest make a executable jar -->
+                    &lt;!&ndash; MainClass in mainfest make a executable jar &ndash;&gt;
                     <archive>
                         <manifest>
-                            <!--更改为自己的主函数启动类-->
+                            &lt;!&ndash;更改为自己的主函数启动类&ndash;&gt;
                             <mainClass>com.demo.JarApplication</mainClass>
                         </manifest>
                     </archive>
@@ -194,7 +193,23 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
+            <!--<plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <mainClass>com.task.TaskApplicationStart</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
+
         </plugins>
     </build>
 </project>

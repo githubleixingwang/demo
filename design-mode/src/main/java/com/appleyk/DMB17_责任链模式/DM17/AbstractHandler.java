@@ -13,12 +13,7 @@ import lombok.Data;
  */
 @Data
 public abstract class AbstractHandler<TData, TFilter> {
-
     protected IdsMaker idsMaker = new IdsMaker(1, 31);
-
-    public void setData(TData data) {
-        this.data = data;
-    }
 
     /**
      * 任务链传递的数据【消费数据And最终数据】
