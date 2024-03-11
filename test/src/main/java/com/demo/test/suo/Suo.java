@@ -17,6 +17,7 @@ import static java.lang.Thread.sleep;
  *
  */
 public class Suo {
+   // private   Integer count1 = 10;
     private  static Integer count1 = 10;
 
     /**
@@ -32,9 +33,9 @@ public class Suo {
             synchronized (this) {//this 对象锁
                 this.count1--;
                 if (this.count1 > 0) {
-                    System.out.println("ticket1：" + Thread.currentThread().getName() + ",剩余" + this.count1);
+                    System.out.println("对象锁：" + Thread.currentThread().getName() + ",剩余" + this.count1);
                 } else {
-                    System.out.println("ticket1：" + Thread.currentThread().getName() + "结束");
+                    System.out.println("对象锁：" + Thread.currentThread().getName() + "结束");
                     break;
                 }
             }
@@ -51,12 +52,12 @@ public class Suo {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            synchronized (Suo.class) {//this 对象锁
+            synchronized (Suo.class) {//类锁
                 this.count1--;
                 if (this.count1 > 0) {
-                    System.out.println("ticket1：" + Thread.currentThread().getName() + ",剩余" + this.count1);
+                    System.out.println("类锁：" + Thread.currentThread().getName() + ",剩余" + this.count1);
                 } else {
-                    System.out.println("ticket1：" + Thread.currentThread().getName() + "结束");
+                    System.out.println("类锁：" + Thread.currentThread().getName() + "结束");
                     break;
                 }
             }
@@ -67,32 +68,50 @@ public class Suo {
 //******************************************************************  对象锁  ****************************************************************
         //多个线程访问一个对象的成员变量： 一个对象的同步方法只允许多个线程进行排队访问
         /*final Suo suo1 = new Suo();
-        new Thread("多个线程访问一个对象的成员变量1") { public void run() {suo1.ticket1();}}.start();
-        new Thread("多个线程访问一个对象的成员变量2") {public void run() {suo1.ticket1();}}.start();*/
-
+        new Thread("多个线程访问一个对象的成员变量-线程1") { public void run() {suo1.ticket1();}}.start();
+        new Thread("多个线程访问一个对象的成员变量-线程2") {public void run() {suo1.ticket1();}}.start();
+        new Thread("多个线程访问一个对象的成员变量-线程3") {public void run() {suo1.ticket1();}}.start();
+        new Thread("多个线程访问一个对象的成员变量-线程4") {public void run() {suo1.ticket1();}}.start();*/
+        /*new Thread("多个线程访问一个对象的成员变量-线程1") { public void run() {suo1.ticket2();}}.start();
+        new Thread("多个线程访问一个对象的成员变量-线程2") {public void run() {suo1.ticket2();}}.start();
+        new Thread("多个线程访问一个对象的成员变量-线程3") {public void run() {suo1.ticket2();}}.start();
+        new Thread("多个线程访问一个对象的成员变量-线程4") {public void run() {suo1.ticket2();}}.start();*/
 
        //两个对象多个线程： 两个对象的锁互不影响；每个对象的同步方法只允许多个线程排队访问
-        final Suo suo2 = new Suo();
+        /*final Suo suo2 = new Suo();
         final Suo suo3 = new Suo();
-        new Thread("多个线程访问多个对象的成员变量1") { public void run() {suo2.ticket1();}}.start();
-        new Thread("多个线程访问多个对象的成员变量2") {public void run() {suo2.ticket1();}}.start();
-        new Thread("多个线程访问多个对象的成员变量3") { public void run() {suo3.ticket1();}}.start();
-        new Thread("多个线程访问多个对象的成员变量4") {public void run() {suo3.ticket1();}}.start();
+        new Thread("多个线程访问多个对象的成员变量-线程1") { public void run() {suo2.ticket1();}}.start();
+        new Thread("多个线程访问多个对象的成员变量-线程2") {public void run() {suo2.ticket1();}}.start();
+        new Thread("多个线程访问多个对象的成员变量-线程3") { public void run() {suo3.ticket1();}}.start();
+        new Thread("多个线程访问多个对象的成员变量-线程4") {public void run() {suo3.ticket1();}}.start();*/
+        /*final Suo suo7 = new Suo();
+        final Suo suo8 = new Suo();
+        new Thread("多个线程访问多个对象的成员变量-线程1") { public void run() {suo7.ticket2();}}.start();
+        new Thread("多个线程访问多个对象的成员变量-线程2") {public void run() {suo7.ticket2();}}.start();
+        new Thread("多个线程访问多个对象的成员变量-线程3") { public void run() {suo8.ticket2();}}.start();
+        new Thread("多个线程访问多个对象的成员变量-线程4") {public void run() {suo8.ticket2();}}.start();*/
 //****************************************************************  类锁  ****************************************************************
         //多个线程访问一个对象的成员变量： 一个对象的同步方法只允许多个线程进行排队访问
-        /*final Suo suo4 = new Suo();
-        new Thread("多个线程访问一个对象的成员变量1") { public void run() {suo4.ticket2();}}.start();
-        new Thread("多个线程访问一个对象的成员变量2") {public void run() {suo4.ticket2();}}.start();*/
+       /* final Suo suo4 = new Suo();
+        new Thread("多个线程访问一个对象的成员变量-线程1") { public void run() {suo4.ticket1();}}.start();
+        new Thread("多个线程访问一个对象的成员变量-线程2") {public void run() {suo4.ticket1();}}.start();*/
+        /*new Thread("多个线程访问一个对象的成员变量-线程1") { public void run() {suo4.ticket2();}}.start();
+        new Thread("多个线程访问一个对象的成员变量-线程2") {public void run() {suo4.ticket2();}}.start();*/
 
         //两个对象多个线程：
         // 对成员变量 两个对象的锁互不影响；每个对象的同步方法只允许多个线程排队访问
         // 对静态变量 两个对象的锁有影响；静态变量只允许每个对象的同步方法和多个线程一起排队访问
-        /*final Suo suo5 = new Suo();
+        final Suo suo5 = new Suo();
         final Suo suo6 = new Suo();
-        new Thread("多个线程访问多个对象的成员变量1") { public void run() {suo5.ticket2();}}.start();
-        new Thread("多个线程访问多个对象的成员变量2") {public void run() {suo5.ticket2();}}.start();
-        new Thread("多个线程访问多个对象的成员变量3") { public void run() {suo6.ticket2();}}.start();
-        new Thread("多个线程访问多个对象的成员变量4") {public void run() {suo6.ticket2();}}.start();*/
+        /*new Thread("多个线程访问多个对象的成员变量-线程1") { public void run() {suo5.ticket1();}}.start();
+        new Thread("多个线程访问多个对象的成员变量-线程2") {public void run() {suo5.ticket1();}}.start();
+        new Thread("多个线程访问多个对象的成员变量-线程3") { public void run() {suo6.ticket1();}}.start();
+        new Thread("多个线程访问多个对象的成员变量-线程4") {public void run() {suo6.ticket1();}}.start();*/
+        /*new Thread("多个线程访问多个对象的成员变量-线程1") { public void run() {suo5.ticket2();}}.start();
+        new Thread("多个线程访问多个对象的成员变量-线程2") {public void run() {suo5.ticket2();}}.start();
+        new Thread("多个线程访问多个对象的成员变量-线程3") { public void run() {suo6.ticket2();}}.start();
+        new Thread("多个线程访问多个对象的成员变量-线程4") {public void run() {suo6.ticket2();}}.start();*/
+
     }
 
 
