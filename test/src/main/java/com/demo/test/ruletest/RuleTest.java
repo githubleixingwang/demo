@@ -1,4 +1,4 @@
-package com.demo.test.test;
+package com.demo.test.ruletest;
 
 
 
@@ -9,6 +9,7 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 /**
+ * 解析()，进行计算
  * @author: lxw
  * @date: 2022-12-30  15:24
  */
