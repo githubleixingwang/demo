@@ -1,4 +1,4 @@
-package com.demo.test.util.http;
+package com.demo.test.util.http_v4_5_6;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
