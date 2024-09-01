@@ -1,3 +1,3 @@
     ---demo
         --vue 
-            --test
+            --testdev
