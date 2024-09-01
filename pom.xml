@@ -10,7 +10,7 @@
 	<packaging>pom</packaging>
 	<name>demo</name>
 	<description>This is parent project</description>
-
+、、fea
 	<!-- 子模块清单（创建新子模块后，会自动填入）-->
 	<modules>
 		<module>common</module>
