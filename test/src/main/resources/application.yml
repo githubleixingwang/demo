@@ -13,9 +13,10 @@ spring:
         enabled: false
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1:3308/tsoc?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
-    username: tsoc
-    password: fake.PWD.fool.4.U
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/demo?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: 123456
 
   autoconfigure:
     exclude:
@@ -28,7 +29,7 @@ spring:
 #  support-methods-arguments: true
 #  auto-dialect: true
 #
-mybatis:
+mybatis-plus:
   #配置映射文件
   mapper-locations: classpath*:mapper/*.xml
 #  type-aliases-package: entity   #配置实体类
@@ -44,3 +45,5 @@ eureka:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@127.0.0.1:18280/eureka/
     enabled: false
 
+conditional:
+  isEnable: false
