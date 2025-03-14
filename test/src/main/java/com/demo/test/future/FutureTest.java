@@ -1,23 +1,18 @@
 package com.demo.test.future;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+
 import java.util.concurrent.*;
 
 public class FutureTest {
 
     public static void main(String[] args) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        Future<String> future = executor.submit(new Callable<String>() {
-            @Override
-            public String call() throws Exception {
-                // 模拟耗时操作
-                //int a=1/0;
-                System.out.println(Thread.currentThread().getName() + "开始执行任务1...");
-                Thread.sleep(2000);
-                return "任务1完成";
-            }
+        Future<String> future = executor.submit(() -> {
+            // 模拟耗时操作
+            //int a=1/0;
+            System.out.println(Thread.currentThread().getName() + "开始执行任务1...");
+            Thread.sleep(2000);
+            return "任务1完成";
         });
 
         executor.execute(() -> {
