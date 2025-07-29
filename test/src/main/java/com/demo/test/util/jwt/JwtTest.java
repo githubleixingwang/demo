@@ -1,4 +1,4 @@
-package com.demo.test.jwt;
+package com.demo.test.util.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
