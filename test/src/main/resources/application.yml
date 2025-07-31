@@ -3,14 +3,34 @@ server:
   #自定义访问路径，spring2.0格式
 #  servlet:
 #    context-path: /
-
 spring:
-  application:
-    name: test
   cloud:
+    discovery:
+      enabled: true
+      # 禁用 Eureka
+      eureka:
+        enabled: false
     loadbalancer:
       ribbon:
         enabled: false
+      # 全局配置
+      cache:
+        enabled: true       # 启用缓存
+        ttl: 30s            # 缓存过期时间
+        capacity: 1000      # 缓存容量
+      health-check:
+        interval: 10s       # 健康检查间隔
+      retry:
+        enabled: true       # 启用重试
+        max-retries-on-same-service-instance: 2
+        max-retries-on-next-service-instance: 1
+
+      # 服务特定配置
+      clients:
+        test:   # 服务名
+          cache:
+            ttl: 10s        # 针对此服务的缓存时间
+          configurations: weighted # 使用自定义加权策略
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -36,14 +56,28 @@ mybatis-plus:
 #mybatis:
 #  mapper-locations: classpath*:com/demo/vue/dao/*.xml
 
-eureka:
-  client:
-    #连接信息
-    fetch-registry: false
-    register-with-eureka: false
-    service-url:
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@127.0.0.1:18280/eureka/
-    enabled: false
+#eureka:
+#  client:
+#    #连接信息
+#    fetch-registry: false
+#    register-with-eureka: false
+#    service-url:
+#      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@127.0.0.1:18280/eureka/
+#    enabled: false
 
 conditional:
   isEnable: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,health,info
+
+aa:
+  bb: true
+
+logging:
+  level:
+    com.alibaba.nacos: DEBUG
+    org.springframework.cloud: DEBUG

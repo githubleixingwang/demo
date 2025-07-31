@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: test
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: ${NACOS_NAMESPACE:test}
+        group: ${NACOS_GROUP:DEFAULT_GROUP}
+        username: ${NACOS_USER:nacos}
+        password: ${NACOS_PASSWORD:nacos}
+        weight: 1.0 # 默认权重
+        enabled: true
+        headers:
+          ServerIdentity: SecurityToken  # 必须与服务器配置匹配
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        namespace: ${spring.cloud.nacos.discovery.namespace}
+        group: ${spring.cloud.nacos.discovery.group}
+        data-id: test.yaml
+        username: ${spring.cloud.nacos.discovery.username}
+        password: ${spring.cloud.nacos.discovery.password}
+        file-extension: yaml
+        refresh-enabled: true
+        headers:
+          ServerIdentity: ${spring.cloud.nacos.discovery.headers.ServerIdentity}

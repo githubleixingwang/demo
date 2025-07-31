@@ -70,7 +70,7 @@
         <logback.version>1.2.10</logback.version>
         <google.version>27.0.1-jre</google.version>
         <easypoi.version>4.4.0</easypoi.version>
-
+        <spring-cloud-alibaba.version>2.2.9.RELEASE</spring-cloud-alibaba.version>
     </properties>
 
     <!-- 项目依赖项 -->
@@ -265,7 +265,17 @@
                 <artifactId>guava</artifactId>
                 <version>${google.version}</version>
             </dependency>
+
+            <!-- Spring Cloud Alibaba 依赖管理 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
+
     </dependencyManagement>
 
     <dependencies>
