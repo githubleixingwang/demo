@@ -4,23 +4,30 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
         namespace: ${NACOS_NAMESPACE:test}
         group: ${NACOS_GROUP:DEFAULT_GROUP}
         username: ${NACOS_USER:nacos}
         password: ${NACOS_PASSWORD:nacos}
         weight: 1.0 # 默认权重
-        enabled: true
+        # Nacos 服务发现开关，通过环境变量 NACOS_DISCOVERY_ENABLED 控制，默认关闭
+        # 设置为 true 时启用 Nacos 服务发现
+        # 设置为 false 时禁用 Nacos 服务发现，项目可以在没有 Nacos 服务的情况下正常启动
+        enabled: ${NACOS_DISCOVERY_ENABLED:false}
         headers:
           ServerIdentity: SecurityToken  # 必须与服务器配置匹配
       config:
-        server-addr: ${spring.cloud.nacos.discovery.server-addr}
-        namespace: ${spring.cloud.nacos.discovery.namespace}
-        group: ${spring.cloud.nacos.discovery.group}
+        server-addr: ${NACOS_SERVER_ADDR:127.0.0.1:8848}
+        namespace: ${NACOS_NAMESPACE:test}
+        group: ${NACOS_GROUP:DEFAULT_GROUP}
         data-id: test.yaml
-        username: ${spring.cloud.nacos.discovery.username}
-        password: ${spring.cloud.nacos.discovery.password}
+        username: ${NACOS_USER:nacos}
+        password: ${NACOS_PASSWORD:nacos}
         file-extension: yaml
         refresh-enabled: true
+        # Nacos 配置中心开关，通过环境变量 NACOS_CONFIG_ENABLED 控制，默认关闭
+        # 设置为 true 时启用 Nacos 配置中心
+        # 设置为 false 时禁用 Nacos 配置中心，项目可以在没有 Nacos 服务的情况下正常启动
+        enabled: ${NACOS_CONFIG_ENABLED:false}
         headers:
-          ServerIdentity: ${spring.cloud.nacos.discovery.headers.ServerIdentity}
+          ServerIdentity: SecurityToken

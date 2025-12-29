@@ -6,7 +6,9 @@ server:
 spring:
   cloud:
     discovery:
-      enabled: true
+      # 服务发现总开关，如果使用 Nacos，此开关会受 bootstrap.yml 中的 nacos.enabled 控制
+      # 如果 Nacos 未启用，可以设置为 false 避免启动错误
+      enabled: ${NACOS_ENABLED:false}
       # 禁用 Eureka
       eureka:
         enabled: false
